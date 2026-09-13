@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { MagneticLink } from "./Magnetic";
@@ -81,9 +82,10 @@ export function Hero() {
         <motion.div variants={fade} className="flex gap-4">
           <MagneticLink
             href="/apply"
-            className="rounded-full bg-paper text-ink px-7 py-4 text-sm font-bold transition-colors hover:bg-saffron"
+            className="group inline-flex items-center gap-2 rounded-full bg-paper text-ink px-7 py-4 text-sm font-bold transition-colors hover:bg-saffron"
           >
             Apply Now
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </MagneticLink>
           <MagneticLink
             href="/fellowship"

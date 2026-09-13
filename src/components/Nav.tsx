@@ -42,11 +42,7 @@ export function Nav({ dark = false }: { dark?: boolean }) {
         {links.map((l) => (
           <Link key={l.href} href={l.href} className="relative group">
             {l.label}
-            <span
-              className={`absolute left-0 -bottom-1 h-px w-0 transition-all duration-300 group-hover:w-full ${
-                light ? "bg-paper" : "bg-ink"
-              }`}
-            />
+            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-linear-to-r from-saffron via-amber to-green transition-all duration-400 ease-out group-hover:w-full" />
           </Link>
         ))}
       </div>

@@ -2,6 +2,32 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
+import { HoverPreview, type HoverPreviewItem } from "@/components/ui/hover-preview";
+
+const rashtrapati: HoverPreviewItem = {
+  key: "rashtrapati",
+  image: "/images/inst-rashtrapati-bhavan.jpg",
+  title: "Rashtrapati Bhavan",
+  subtitle: "The Presidential Estate, New Delhi",
+};
+const southBlock: HoverPreviewItem = {
+  key: "south-block",
+  image: "/images/inst-south-block.jpg",
+  title: "South Block",
+  subtitle: "Ministry of External Affairs & Cabinet Secretariat",
+};
+const supremeCourt: HoverPreviewItem = {
+  key: "supreme-court",
+  image: "/images/inst-supreme-court.jpg",
+  title: "Supreme Court of India",
+  subtitle: "Constitutional Institutions",
+};
+const indiaGate: HoverPreviewItem = {
+  key: "india-gate",
+  image: "/images/hero-india-gate.jpg",
+  title: "India Gate",
+  subtitle: "New Delhi",
+};
 
 export const metadata: Metadata = { title: "The Fellowship — MP LEAD" };
 
@@ -40,7 +66,7 @@ export default function FellowshipPage() {
           institutions that run the republic — paired with rigorous training, mentorship and a
           real field project.
         </p>
-        <div className="grid sm:grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 gap-8 mb-24">
           {pillars.map((p) => (
             <Reveal key={p.title}>
               <div className="border-t border-line pt-5">
@@ -49,6 +75,30 @@ export default function FellowshipPage() {
               </div>
             </Reveal>
           ))}
+        </div>
+
+        <div className="border-t border-line pt-16">
+          <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-6">
+            Hover to look inside
+          </div>
+          <HoverPreview
+            paragraphs={[
+              [
+                "Fellows walk the grounds of ",
+                rashtrapati,
+                " and pass through the gates of ",
+                southBlock,
+                " — not as visitors, but as students of how the republic actually runs.",
+              ],
+              [
+                "Some weeks are spent in the shadow of the ",
+                supremeCourt,
+                ", others gathered under the ",
+                indiaGate,
+                " with the rest of the cohort. Every building has a lesson.",
+              ],
+            ]}
+          />
         </div>
       </main>
       <Footer />
