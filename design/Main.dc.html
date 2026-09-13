@@ -1,0 +1,349 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root{
+      --ink:#141018; --ink-soft:#3a3440;
+      --paper:#f7f2ea; --paper-dim:#efe7d8;
+      --saffron:oklch(0.74 0.17 55); --saffron-deep:oklch(0.58 0.16 50);
+      --maroon:oklch(0.38 0.11 22); --green:oklch(0.42 0.09 150);
+      --line:rgba(20,16,24,.12);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    h1,h2,h3,.serif{font-family:Newsreader,serif;}
+    a{color:inherit;text-decoration:none;} a:hover{color:var(--saffron-deep);}
+    .wrap{max-width:1240px;margin:0 auto;padding:0 48px;}
+    .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--saffron-deep);}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+    .reveal.in{opacity:1;transform:none;}
+    .reveal-stagger > * {opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+    .reveal-stagger.in > *{opacity:1;transform:none;}
+    .reveal-stagger.in > *:nth-child(1){transition-delay:.02s}
+    .reveal-stagger.in > *:nth-child(2){transition-delay:.10s}
+    .reveal-stagger.in > *:nth-child(3){transition-delay:.18s}
+    .reveal-stagger.in > *:nth-child(4){transition-delay:.26s}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:100px;font-weight:700;font-size:15px;cursor:pointer;border:1px solid transparent;transition:transform .35s cubic-bezier(.16,1,.3,1),background .3s,color .3s;will-change:transform;}
+    .btn-primary{background:var(--ink);color:var(--paper);}
+    .btn-primary:hover{color:var(--paper);background:var(--saffron-deep);}
+    .btn-ghost{border-color:var(--ink);color:var(--ink);}
+    .btn-ghost:hover{color:var(--ink);background:var(--ink);color:var(--paper);}
+    nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;transition:background .4s,padding .4s,box-shadow .4s;}
+    nav.solid{background:rgba(247,242,234,.92);backdrop-filter:blur(10px);padding:14px 48px;box-shadow:0 1px 0 var(--line);}
+    .logo{font-family:Newsreader,serif;font-size:20px;font-weight:600;letter-spacing:.01em;}
+    .navlinks{display:flex;gap:36px;font-size:14px;font-weight:600;}
+    .navlinks a{position:relative;padding-bottom:4px;}
+    .navlinks a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--ink);transition:width .35s cubic-bezier(.16,1,.3,1);}
+    .navlinks a:hover::after{width:100%;}
+
+    /* HERO */
+    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:160px 48px 64px;overflow:hidden;background:
+      linear-gradient(180deg,var(--paper) 0%,var(--paper) 55%, var(--paper-dim) 100%);}
+    .hero-blocks{position:absolute;inset:0;z-index:0;}
+    .hb{position:absolute;border-radius:2px;}
+    .hb1{top:8%;right:6%;width:34%;height:52%;background:linear-gradient(155deg,var(--maroon),oklch(0.3 0.09 20));}
+    .hb2{top:2%;right:2%;width:11%;height:16%;background:var(--saffron);}
+    .hb3{top:40%;right:32%;width:9%;height:9%;border-radius:50%;background:var(--paper);border:2px solid var(--ink);}
+    .hb4{bottom:6%;right:14%;width:16%;height:22%;background:var(--green);}
+    .hero-inner{position:relative;z-index:1;}
+    .hero h1{font-size:clamp(48px,7.4vw,108px);line-height:.98;font-weight:500;margin:0 0 28px;letter-spacing:-.01em;max-width:920px;}
+    .hero h1 .line{display:block;overflow:hidden;}
+    .hero h1 .line span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.16,1,.3,1);}
+    .hero.in h1 .line:nth-child(1) span{transition-delay:.15s;transform:none;}
+    .hero.in h1 .line:nth-child(2) span{transition-delay:.30s;transform:none;}
+    .hero-sub{font-size:19px;max-width:480px;color:var(--ink-soft);margin:0 0 40px;opacity:0;transition:opacity .9s ease .55s;}
+    .hero.in .hero-sub{opacity:1;}
+    .hero-cta{display:flex;gap:16px;opacity:0;transform:translateY(14px);transition:opacity .8s ease .7s,transform .8s ease .7s;}
+    .hero.in .hero-cta{opacity:1;transform:none;}
+    .scroll-cue{position:absolute;left:48px;bottom:28px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px;color:var(--ink-soft);}
+    .scroll-cue .bar{width:1px;height:34px;background:var(--ink-soft);position:relative;overflow:hidden;}
+    .scroll-cue .bar i{position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--ink);animation:scrollcue 1.8s ease-in-out infinite;}
+    @keyframes scrollcue{0%{top:-100%}50%{top:0}100%{top:100%}}
+
+    /* STATS */
+    .stats{padding:96px 48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;}
+    .stat-num{font-family:Newsreader,serif;font-size:clamp(36px,4.4vw,64px);font-weight:500;line-height:1;}
+    .stat-label{margin-top:10px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+
+    /* INSTITUTIONS */
+    .inst{padding:140px 48px;background:var(--ink);color:var(--paper);}
+    .inst-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:64px;}
+    .inst-head h2{font-size:clamp(32px,4.2vw,56px);font-weight:500;max-width:640px;margin:14px 0 0;}
+    .inst-head p{max-width:360px;color:rgba(247,242,234,.65);font-size:15px;line-height:1.6;}
+    .inst-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+    .inst-card{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;cursor:pointer;}
+    .inst-card .face{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;transition:transform .6s cubic-bezier(.16,1,.3,1);}
+    .inst-card:hover .face{transform:scale(1.06);}
+    .inst-card .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,24,0) 40%,rgba(20,16,24,.85) 100%);}
+    .inst-card h3{position:relative;font-size:22px;font-weight:500;margin:0 0 6px;color:#fff;}
+    .inst-card span{position:relative;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+    .ic1 .face{background:linear-gradient(150deg,oklch(0.5 0.13 45),oklch(0.32 0.1 24));}
+    .ic2 .face{background:linear-gradient(150deg,oklch(0.4 0.1 150),oklch(0.24 0.06 150));}
+    .ic3 .face{background:linear-gradient(150deg,oklch(0.42 0.09 260),oklch(0.22 0.06 265));}
+
+    /* JOURNEY PREVIEW */
+    .journey{padding:140px 48px;}
+    .journey-head{margin-bottom:64px;}
+    .journey-head h2{font-size:clamp(32px,4.2vw,56px);font-weight:500;max-width:600px;}
+    .jline{position:relative;display:flex;justify-content:space-between;padding:0 4px;}
+    .jline::before{content:'';position:absolute;top:9px;left:0;right:0;height:1px;background:var(--line);}
+    .jline .jstep{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;flex:1;}
+    .jline .jdot{width:19px;height:19px;border-radius:50%;background:var(--paper);border:1px solid var(--ink);}
+    .jline .jstep:nth-child(-n+3) .jdot{background:var(--saffron);border-color:var(--saffron-deep);}
+    .jline .jlabel{font-size:11px;text-align:center;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);max-width:88px;}
+
+    /* FELLOWS */
+    .fellows{padding:140px 48px;background:var(--paper-dim);}
+    .fellows-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;gap:24px;}
+    .fellows-head h2{font-size:clamp(32px,4.2vw,56px);font-weight:500;}
+    .frow{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;margin:0 -48px;padding-left:48px;padding-right:48px;}
+    .frow::-webkit-scrollbar{height:0;}
+    .fcard{scroll-snap-align:start;flex:0 0 268px;cursor:pointer;}
+    .fphoto{width:268px;height:340px;border-radius:3px;position:relative;overflow:hidden;display:flex;align-items:flex-end;transition:border-radius .5s cubic-bezier(.16,1,.3,1);}
+    .fcard:hover .fphoto{border-radius:3px 3px 40px 3px;}
+    .finit{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Newsreader,serif;font-size:120px;font-weight:500;color:rgba(255,255,255,.16);transition:transform .6s cubic-bezier(.16,1,.3,1);}
+    .fcard:hover .finit{transform:scale(1.12) translateY(-6px);}
+    .fmeta{position:relative;padding:20px;color:#fff;}
+    .fmeta h4{margin:0 0 4px;font-family:Newsreader,serif;font-weight:500;font-size:19px;}
+    .fmeta span{font-size:12px;color:rgba(255,255,255,.72);letter-spacing:.03em;}
+    .fcard-info{padding-top:14px;font-size:13px;color:var(--ink-soft);opacity:0;transform:translateY(-6px);transition:opacity .4s,transform .4s;}
+    .fcard:hover .fcard-info{opacity:1;transform:none;}
+
+    /* PROJECTS */
+    .projects{padding:140px 48px;}
+    .proj{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:120px;}
+    .proj:nth-child(even){direction:rtl;} .proj:nth-child(even) > *{direction:ltr;}
+    .proj-media{aspect-ratio:4/3;border-radius:4px;position:relative;overflow:hidden;}
+    .proj-tag{position:absolute;top:20px;left:20px;background:rgba(247,242,234,.92);padding:6px 14px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+    .proj h3{font-size:clamp(24px,2.6vw,34px);font-weight:500;margin:0 0 14px;}
+    .proj p{color:var(--ink-soft);line-height:1.7;font-size:15px;margin:0 0 20px;max-width:440px;}
+    .proj-stats{display:flex;gap:28px;margin-bottom:24px;}
+    .proj-stats div span{display:block;font-family:Newsreader,serif;font-size:26px;font-weight:500;}
+    .proj-stats div small{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
+
+    /* IMPACT */
+    .impact{padding:160px 48px;background:var(--ink);color:var(--paper);text-align:center;}
+    .impact h2{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--saffron);margin-bottom:56px;font-weight:700;}
+    .impact-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
+    .impact-num{font-family:Newsreader,serif;font-size:clamp(48px,6.6vw,96px);font-weight:500;line-height:1;}
+    .impact-label{margin-top:12px;font-size:13px;color:rgba(247,242,234,.6);text-transform:uppercase;letter-spacing:.06em;}
+
+    /* CTA + FOOTER */
+    .cta{padding:160px 48px;text-align:center;}
+    .cta h2{font-size:clamp(34px,5vw,64px);font-weight:500;max-width:760px;margin:0 auto 40px;}
+    footer{padding:64px 48px 40px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;}
+    .foot-cols{display:flex;gap:64px;}
+    .foot-col h5{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 14px;}
+    .foot-col a{display:block;font-size:14px;margin-bottom:9px;}
+
+    @media(max-width:900px){
+      .wrap,nav,.hero,.stats,.inst,.journey,.fellows,.projects,.impact,.cta,footer{padding-left:24px;padding-right:24px;}
+      .navlinks{display:none;}
+      .stats-grid,.inst-grid,.impact-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .proj,.proj:nth-child(even){grid-template-columns:1fr;direction:ltr;gap:24px;}
+      .jline .jlabel{max-width:52px;font-size:9px;}
+      footer{flex-direction:column;}
+      .foot-cols{gap:36px;flex-wrap:wrap;}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .reveal,.reveal-stagger>*,.hero h1 .line span,.hero-sub,.hero-cta,.fphoto,.finit{transition:none!important;opacity:1!important;transform:none!important;}
+    }
+  </style>
+</helmet>
+
+<nav id="nav">
+  <div class="logo">MP LEAD</div>
+  <div class="navlinks">
+    <a href="#">Fellowship</a>
+    <a href="#">Journey</a>
+    <a href="#">Fellows</a>
+    <a href="#">Projects</a>
+    <a href="#">Alumni</a>
+  </div>
+  <a class="btn btn-primary" style="padding:11px 22px;font-size:13px;" href="#">Apply Now</a>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-blocks">
+    <div class="hb hb1"></div><div class="hb hb2"></div><div class="hb hb3"></div><div class="hb hb4"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow" style="margin-bottom:20px;">MP LEAD — Batch 05 Applications Open</div>
+    <h1><span class="line"><span>Legislative exposure.</span></span><span class="line"><span>Administrative development.</span></span></h1>
+    <p class="hero-sub">A two-month immersive fellowship into governance, public policy and institutional leadership — for India's most driven young minds.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#">Apply Now</a>
+      <a class="btn btn-ghost" href="#">Explore MP LEAD</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="bar"><i></i></span></div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid reveal-stagger" id="statsGrid">
+    <div><div class="stat-num" data-count="5000" data-suffix="+">0</div><div class="stat-label">Applicants</div></div>
+    <div><div class="stat-num" data-count="40" data-suffix="">0</div><div class="stat-label">Fellows Selected</div></div>
+    <div><div class="stat-num" data-count="62" data-suffix="%">0</div><div class="stat-label">Women Fellows</div></div>
+    <div><div class="stat-num" data-count="2" data-suffix=" Mo">0</div><div class="stat-label">Duration</div></div>
+  </div>
+</section>
+
+<section class="inst">
+  <div class="wrap">
+    <div class="inst-head reveal">
+      <div>
+        <div class="eyebrow" style="color:var(--saffron);">Enter the Institutions</div>
+        <h2>Exposure to the offices that shape the republic.</h2>
+      </div>
+      <p>Fellows engage directly with constitutional offices and ministries — observing process, not performing politics. Exposure, learning, perspective.</p>
+    </div>
+    <div class="inst-grid reveal-stagger">
+      <div class="inst-card ic1"><div class="face"><div class="veil"></div><h3>Vice-President's Secretariat</h3><span>Institutional Protocol</span></div></div>
+      <div class="inst-card ic2"><div class="face"><div class="veil"></div><h3>Ministry of External Affairs</h3><span>Diplomatic Practice</span></div></div>
+      <div class="inst-card ic3"><div class="face"><div class="veil"></div><h3>Parliamentary Exposure</h3><span>Legislative Process</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="journey">
+  <div class="wrap">
+    <div class="journey-head reveal">
+      <div class="eyebrow">The Fellowship Journey</div>
+      <h2>Nine stages. One transformation.</h2>
+    </div>
+    <div class="jline reveal">
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Orientation</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Training</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Workshops</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Institutional Exposure</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Field Engagement</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Mentorship</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Research</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Final Project</div></div>
+      <div class="jstep"><div class="jdot"></div><div class="jlabel">Graduation</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="fellows">
+  <div class="wrap">
+    <div class="fellows-head reveal">
+      <div>
+        <div class="eyebrow">Fellow Stories</div>
+        <h2>Forty voices. One republic.</h2>
+      </div>
+      <a class="btn btn-ghost" href="#">View Directory</a>
+    </div>
+  </div>
+  <div class="frow reveal-stagger" id="frow">
+    <div class="fcard"><div class="fphoto" style="background:linear-gradient(150deg,oklch(0.5 0.13 45),oklch(0.32 0.1 24));"><div class="finit">A</div><div class="fmeta"><h4>Fellow — Batch 04</h4><span>Maharashtra</span></div></div><div class="fcard-info">Public Health Policy · Mentor: Dr. Rao</div></div>
+    <div class="fcard"><div class="fphoto" style="background:linear-gradient(150deg,oklch(0.4 0.1 150),oklch(0.24 0.06 150));"><div class="finit">B</div><div class="fmeta"><h4>Fellow — Batch 04</h4><span>Tamil Nadu</span></div></div><div class="fcard-info">Urban Mobility · Mentor: Ms. Nair</div></div>
+    <div class="fcard"><div class="fphoto" style="background:linear-gradient(150deg,oklch(0.42 0.09 260),oklch(0.22 0.06 265));"><div class="finit">C</div><div class="fmeta"><h4>Fellow — Batch 04</h4><span>Bihar</span></div></div><div class="fcard-info">Rural Education · Mentor: Mr. Verma</div></div>
+    <div class="fcard"><div class="fphoto" style="background:linear-gradient(150deg,oklch(0.55 0.14 90),oklch(0.34 0.09 60));"><div class="finit">D</div><div class="fmeta"><h4>Fellow — Batch 04</h4><span>Assam</span></div></div><div class="fcard-info">Climate Resilience · Mentor: Dr. Baruah</div></div>
+    <div class="fcard"><div class="fphoto" style="background:linear-gradient(150deg,oklch(0.45 0.1 200),oklch(0.26 0.07 210));"><div class="finit">E</div><div class="fmeta"><h4>Fellow — Batch 04</h4><span>Rajasthan</span></div></div><div class="fcard-info">Water Governance · Mentor: Ms. Kothari</div></div>
+  </div>
+</section>
+
+<section class="projects">
+  <div class="wrap">
+    <div class="journey-head reveal"><div class="eyebrow">Field Projects</div><h2>Research that meets the ground.</h2></div>
+
+    <div class="proj reveal">
+      <div class="proj-media" style="background:linear-gradient(155deg,oklch(0.5 0.13 45),oklch(0.3 0.1 24));"><div class="proj-tag">Public Health</div></div>
+      <div>
+        <h3>Last-Mile Immunisation in Tribal Blocks</h3>
+        <p>A district-level study on cold-chain gaps and community trust, producing field-tested recommendations adopted by two block offices.</p>
+        <div class="proj-stats"><div><span>3</span><small>Districts</small></div><div><span>60+</span><small>Interviews</small></div><div><span>1</span><small>Policy Brief</small></div></div>
+        <a class="btn btn-ghost" href="#">Read the case study →</a>
+      </div>
+    </div>
+
+    <div class="proj reveal">
+      <div class="proj-media" style="background:linear-gradient(155deg,oklch(0.45 0.1 200),oklch(0.26 0.07 210));"><div class="proj-tag">Urban Governance</div></div>
+      <div>
+        <h3>Municipal Grievance Redressal Redesign</h3>
+        <p>Mapping citizen complaint flows across a mid-sized municipal corporation to cut average resolution time.</p>
+        <div class="proj-stats"><div><span>1</span><small>City</small></div><div><span>8</span><small>Wards</small></div><div><span>40%</span><small>Faster Target</small></div></div>
+        <a class="btn btn-ghost" href="#">Read the case study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="impact">
+  <div class="wrap">
+    <h2>The Fellowship, In Numbers</h2>
+    <div class="impact-grid reveal-stagger" id="impactGrid">
+      <div><div class="impact-num" data-count="5000" data-suffix="+">0</div><div class="impact-label">Applicants</div></div>
+      <div><div class="impact-num" data-count="40" data-suffix="">0</div><div class="impact-label">Fellows</div></div>
+      <div><div class="impact-num" data-count="62" data-suffix="%">0</div><div class="impact-label">Women</div></div>
+      <div><div class="impact-num" data-count="18" data-suffix="">0</div><div class="impact-label">States Represented</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="eyebrow reveal" style="justify-content:center;display:flex;">Applications for Batch 05 Open</div>
+  <h2 class="reveal serif">Step into the institutions that run the republic.</h2>
+  <a class="btn btn-primary reveal" href="#">Start Your Application</a>
+</section>
+
+<footer>
+  <div class="logo">MP LEAD</div>
+  <div class="foot-cols">
+    <div class="foot-col"><h5>Explore</h5><a href="#">Fellowship</a><a href="#">Journey</a><a href="#">Fellows</a><a href="#">Projects</a></div>
+    <div class="foot-col"><h5>Program</h5><a href="#">Apply</a><a href="#">Alumni</a><a href="#">Resources</a><a href="#">FAQ</a></div>
+    <div class="foot-col"><h5>Connect</h5><a href="#">Contact</a><a href="#">Media & Press</a></div>
+  </div>
+</footer>
+
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var nav = document.getElementById('nav');
+    var hero = document.getElementById('hero');
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 40){ nav.classList.add('solid'); } else { nav.classList.remove('solid'); }
+    });
+    requestAnimationFrame(function(){ hero.classList.add('in'); });
+
+    var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.18});
+    revealEls.forEach(function(el){ io.observe(el); });
+
+    function animateCount(el){
+      var target = parseFloat(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      var start = null; var dur = 1400;
+      function step(ts){
+        if(!start) start = ts;
+        var p = Math.min((ts-start)/dur, 1);
+        var eased = 1 - Math.pow(1-p, 3);
+        var val = Math.round(target*eased);
+        el.textContent = val.toLocaleString() + suffix;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    var counters = document.querySelectorAll('[data-count]');
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); } });
+    }, {threshold:.4});
+    counters.forEach(function(c){ cio.observe(c); });
+  }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

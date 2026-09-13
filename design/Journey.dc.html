@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Manrope:wght@400;500;600;700;800&display=swap">
+  <style>
+    :root{--ink:#141018;--paper:#f7f2ea;--saffron:oklch(0.74 0.17 55);--saffron-deep:oklch(0.58 0.16 50);}
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--ink);color:var(--paper);font-family:Manrope,sans-serif;overflow-x:hidden;}
+    .serif{font-family:Newsreader,serif;}
+    a{color:inherit;}
+    .top{position:sticky;top:0;z-index:5;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,var(--ink) 60%,transparent);}
+    .logo{font-family:Newsreader,serif;font-size:19px;}
+    .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--saffron);}
+
+    .progress-rail{position:fixed;left:48px;top:120px;bottom:80px;width:1px;background:rgba(247,242,234,.18);z-index:4;}
+    .progress-fill{position:absolute;top:0;left:0;width:100%;background:var(--saffron);height:0%;transition:height .1s linear;}
+    .progress-pct{position:fixed;left:38px;bottom:36px;font-size:12px;color:rgba(247,242,234,.5);z-index:4;}
+
+    .stage{min-height:100vh;display:flex;align-items:center;padding:60px 48px 60px 110px;position:relative;}
+    .stage-grid{display:grid;grid-template-columns:110px 1fr 1fr;gap:40px;align-items:center;width:100%;max-width:1200px;margin:0 auto;}
+    .stage-num{font-family:Newsreader,serif;font-size:22px;color:rgba(247,242,234,.35);}
+    .stage-text{opacity:.25;transform:translateX(-16px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);}
+    .stage.active .stage-text{opacity:1;transform:none;}
+    .stage-text h2{font-size:clamp(30px,3.6vw,52px);font-weight:500;margin:0 0 16px;}
+    .stage-text p{color:rgba(247,242,234,.62);font-size:15px;line-height:1.7;max-width:420px;margin:0 0 18px;}
+    .stage-tag{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--saffron);border:1px solid rgba(255,187,51,.35);padding:6px 14px;border-radius:100px;}
+    .stage-media{aspect-ratio:4/5;border-radius:4px;position:relative;overflow:hidden;opacity:.3;transform:scale(.94);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+    .stage.active .stage-media{opacity:1;transform:none;}
+    .stage-media .mk{position:absolute;inset:0;display:flex;align-items:flex-end;padding:24px;font-family:Newsreader,serif;font-size:15px;}
+
+    .mini-map{display:flex;gap:6px;margin-top:22px;}
+    .mini-dot{width:7px;height:7px;border-radius:50%;background:rgba(247,242,234,.25);}
+    .mini-dot.done{background:var(--saffron);}
+
+    @media(max-width:900px){
+      .stage{padding:60px 24px;}
+      .stage-grid{grid-template-columns:1fr;gap:20px;}
+      .stage-num{display:none;}
+      .progress-rail{left:16px;}
+    }
+    @media(prefers-reduced-motion:reduce){ .stage-text,.stage-media{transition:none;opacity:1;transform:none;} }
+  </style>
+</helmet>
+
+<div class="top">
+  <div class="logo">MP LEAD</div>
+  <div class="eyebrow">The Fellowship Journey</div>
+</div>
+
+<div class="progress-rail"><div class="progress-fill" id="pfill"></div></div>
+<div class="progress-pct" id="ppct">Stage 1 / 9</div>
+
+<div id="stages">
+  <section class="stage active" data-i="0">
+    <div class="stage-grid">
+      <div class="stage-num">01</div>
+      <div class="stage-text">
+        <span class="stage-tag">Week 1</span>
+        <h2>Orientation</h2>
+        <p>Fellows arrive, meet their batch, and are introduced to the fellowship's structure, expectations and the institutions they'll engage with.</p>
+        <div class="mini-map" id="mmap"></div>
+      </div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.42 0.09 260),oklch(0.22 0.06 265));"><div class="mk">Cohort formation & induction</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="1">
+    <div class="stage-grid">
+      <div class="stage-num">02</div>
+      <div class="stage-text"><span class="stage-tag">Weeks 2–3</span><h2>Training</h2><p>Structured sessions on public policy fundamentals, governance frameworks, and research methods for field engagement.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.5 0.13 45),oklch(0.3 0.1 24));"><div class="mk">Policy & governance foundations</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="2">
+    <div class="stage-grid">
+      <div class="stage-num">03</div>
+      <div class="stage-text"><span class="stage-tag">Weeks 3–4</span><h2>Workshops</h2><p>Hands-on workshops with practitioners across policy, communication and administration sharpen the fellows' working skillset.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.4 0.1 150),oklch(0.24 0.06 150));"><div class="mk">Practitioner-led sessions</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="3">
+    <div class="stage-grid">
+      <div class="stage-num">04</div>
+      <div class="stage-text"><span class="stage-tag">Weeks 4–5</span><h2>Institutional Exposure</h2><p>Direct exposure to constitutional offices and ministries — observing protocol, process and the machinery of the state.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.45 0.1 200),oklch(0.26 0.07 210));"><div class="mk">Offices of the republic</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="4">
+    <div class="stage-grid">
+      <div class="stage-num">05</div>
+      <div class="stage-text"><span class="stage-tag">Weeks 5–6</span><h2>Field Engagement</h2><p>Fellows travel to their project districts for ground-level fieldwork — interviews, site visits and data collection.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.55 0.14 90),oklch(0.34 0.09 60));"><div class="mk">On the ground, in the districts</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="5">
+    <div class="stage-grid">
+      <div class="stage-num">06</div>
+      <div class="stage-text"><span class="stage-tag">Ongoing</span><h2>Mentorship</h2><p>Each fellow is paired with a mentor for regular guidance on their research question, fieldwork and final project direction.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.38 0.11 22),oklch(0.22 0.07 20));"><div class="mk">One-on-one guidance</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="6">
+    <div class="stage-grid">
+      <div class="stage-num">07</div>
+      <div class="stage-text"><span class="stage-tag">Weeks 6–7</span><h2>Research</h2><p>Fieldwork is synthesised into structured findings, insights and draft policy recommendations under mentor review.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.42 0.09 260),oklch(0.28 0.08 240));"><div class="mk">From data to insight</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="7">
+    <div class="stage-grid">
+      <div class="stage-num">08</div>
+      <div class="stage-text"><span class="stage-tag">Week 8</span><h2>Final Project</h2><p>Fellows deliver a final report and presentation — a concrete, actionable contribution to their focus area.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.5 0.13 45),oklch(0.34 0.09 60));"><div class="mk">Presenting to a review panel</div></div>
+    </div>
+  </section>
+  <section class="stage" data-i="8">
+    <div class="stage-grid">
+      <div class="stage-num">09</div>
+      <div class="stage-text"><span class="stage-tag">Week 8</span><h2>Graduation</h2><p>Fellows graduate into the MP LEAD alumni network — carrying the fellowship's perspective into their careers.</p></div>
+      <div class="stage-media" style="background:linear-gradient(155deg,oklch(0.4 0.1 150),oklch(0.26 0.07 210));"><div class="mk">Welcome to the alumni network</div></div>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    var stages = Array.prototype.slice.call(document.querySelectorAll('.stage'));
+    var pfill = document.getElementById('pfill');
+    var ppct = document.getElementById('ppct');
+    var mmap = document.getElementById('mmap');
+    var total = stages.length;
+    for(var i=0;i<total;i++){ var d=document.createElement('div'); d.className='mini-dot'+(i===0?' done':''); mmap.appendChild(d); }
+    var dots = mmap.children;
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          stages.forEach(function(s){ s.classList.remove('active'); });
+          e.target.classList.add('active');
+          var idx = parseInt(e.target.getAttribute('data-i'), 10);
+          ppct.textContent = 'Stage ' + (idx+1) + ' / ' + total;
+          pfill.style.height = ((idx+1)/total*100) + '%';
+          for(var j=0;j<dots.length;j++){ dots[j].classList.toggle('done', j<=idx); }
+        }
+      });
+    }, {threshold:.55});
+    stages.forEach(function(s){ io.observe(s); });
+  }
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

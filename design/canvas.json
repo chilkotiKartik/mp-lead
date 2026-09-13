@@ -1,0 +1,13 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 5600 },
+    { "file": "Journey.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 4200, "title": "Fellowship Journey" },
+    { "file": "Fellows.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 1400, "title": "Fellow Directory" },
+    { "file": "FellowPortal.dc.html", "x": 0, "y": 5760, "w": 1440, "h": 1020, "title": "Fellow Portal" },
+    { "file": "AdminCommand.dc.html", "x": 1560, "y": 4360, "w": 1560, "h": 1060, "title": "Admin Command Centre" }
+  ],
+  "annotations": [
+    { "id": "note-intro", "x": 0, "y": -140, "w": 480, "text": "MP LEAD — homepage, signature journey timeline, fellow directory, fellow portal & admin command centre. Editorial/institutional direction: Newsreader + Manrope, saffron/maroon/deep-green accents on ink & cream. Photography is placeholder color-blocked treatment — swap in cleared real photography before launch." }
+  ],
+  "launch": { "view": "focused", "file": "Main.dc.html" }
+}
