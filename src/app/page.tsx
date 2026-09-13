@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
+import { Intro } from "@/components/Intro";
 import { Reveal, RevealStagger, RevealItem } from "@/components/Reveal";
 import { Counter } from "@/components/Counter";
 import { stats, institutions, journeyStages, fellows, projects } from "@/lib/data";
@@ -11,7 +13,8 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
+      <Intro />
+      <Nav dark />
       <main>
         <Hero />
 
@@ -52,15 +55,19 @@ export default function Home() {
               {institutions.map((inst) => (
                 <RevealItem key={inst.name}>
                   <div className="group relative aspect-3/4 rounded overflow-hidden cursor-pointer">
-                    <div
-                      className="absolute inset-0 flex flex-col justify-end p-6 transition-transform duration-600 group-hover:scale-[1.06]"
-                      style={{ background: inst.tint }}
-                    >
-                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/85" />
+                    <Image
+                      src={inst.image}
+                      alt={inst.name}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover grayscale-[60%] transition-[transform,filter] duration-700 ease-out group-hover:scale-110 group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 flex flex-col justify-end p-6">
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/90" />
                       <h3 className="relative text-[22px] font-medium text-white mb-1.5">
                         {inst.name}
                       </h3>
-                      <span className="relative text-xs uppercase tracking-wider text-white/60">
+                      <span className="relative text-xs uppercase tracking-wider text-white/70">
                         {inst.tag}
                       </span>
                     </div>

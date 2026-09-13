@@ -5,7 +5,15 @@ export const stats = [
   { value: 2, suffix: " Mo", label: "Duration" },
 ] as const;
 
-export const journeyStages = [
+type JourneyStage = {
+  week: string;
+  title: string;
+  body: string;
+  tint: string;
+  image?: string;
+};
+
+export const journeyStages: JourneyStage[] = [
   {
     week: "Week 1",
     title: "Orientation",
@@ -29,6 +37,7 @@ export const journeyStages = [
     title: "Institutional Exposure",
     body: "Direct exposure to constitutional offices and ministries — observing protocol, process and the machinery of the state.",
     tint: "linear-gradient(155deg, oklch(0.45 0.1 200), oklch(0.26 0.07 210))",
+    image: "/images/inst-south-block.jpg",
   },
   {
     week: "Weeks 5–6",
@@ -59,24 +68,25 @@ export const journeyStages = [
     title: "Graduation",
     body: "Fellows graduate into the MP LEAD alumni network — carrying the fellowship's perspective into their careers.",
     tint: "linear-gradient(155deg, oklch(0.4 0.1 150), oklch(0.26 0.07 210))",
+    image: "/images/hero-india-gate.jpg",
   },
-] as const;
+];
 
 export const institutions = [
   {
-    name: "Vice-President's Secretariat",
-    tag: "Institutional Protocol",
-    tint: "linear-gradient(150deg, oklch(0.5 0.13 45), oklch(0.32 0.1 24))",
+    name: "Rashtrapati Bhavan",
+    tag: "The Presidential Estate",
+    image: "/images/inst-rashtrapati-bhavan.jpg",
   },
   {
-    name: "Ministry of External Affairs",
-    tag: "Diplomatic Practice",
-    tint: "linear-gradient(150deg, oklch(0.4 0.1 150), oklch(0.24 0.06 150))",
+    name: "South Block",
+    tag: "Ministry of External Affairs & Cabinet Secretariat",
+    image: "/images/inst-south-block.jpg",
   },
   {
-    name: "Parliamentary Exposure",
-    tag: "Legislative Process",
-    tint: "linear-gradient(150deg, oklch(0.42 0.09 260), oklch(0.22 0.06 265))",
+    name: "Supreme Court of India",
+    tag: "Constitutional Institutions",
+    image: "/images/inst-supreme-court.jpg",
   },
 ] as const;
 

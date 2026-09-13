@@ -12,7 +12,7 @@ const links = [
   { href: "/alumni", label: "Alumni" },
 ];
 
-export function Nav() {
+export function Nav({ dark = false }: { dark?: boolean }) {
   const [solid, setSolid] = useState(false);
 
   useEffect(() => {
@@ -22,10 +22,17 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const light = dark && !solid;
+
   return (
     <motion.nav
-      className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 md:px-12 transition-[padding,box-shadow,background-color] duration-500 ${
-        solid ? "bg-paper/90 backdrop-blur-md py-3.5 shadow-[0_1px_0_var(--color-line)]" : "py-5.5"
+      initial={{ y: -30, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 md:px-12 transition-[padding,box-shadow,background-color,color] duration-500 ${
+        solid
+          ? "bg-paper/90 backdrop-blur-md py-3.5 shadow-[0_1px_0_var(--color-line)] text-ink"
+          : `py-5.5 ${light ? "text-paper" : "text-ink"}`
       }`}
     >
       <Link href="/" className="font-serif text-xl">
@@ -35,13 +42,21 @@ export function Nav() {
         {links.map((l) => (
           <Link key={l.href} href={l.href} className="relative group">
             {l.label}
-            <span className="absolute left-0 -bottom-1 h-px w-0 bg-ink transition-all duration-300 group-hover:w-full" />
+            <span
+              className={`absolute left-0 -bottom-1 h-px w-0 transition-all duration-300 group-hover:w-full ${
+                light ? "bg-paper" : "bg-ink"
+              }`}
+            />
           </Link>
         ))}
       </div>
       <Link
         href="/apply"
-        className="rounded-full bg-ink text-paper px-5 py-2.5 text-[13px] font-bold transition-colors hover:bg-saffron-deep"
+        className={`rounded-full px-5 py-2.5 text-[13px] font-bold transition-colors ${
+          light
+            ? "bg-paper text-ink hover:bg-saffron"
+            : "bg-ink text-paper hover:bg-saffron-deep"
+        }`}
       >
         Apply Now
       </Link>

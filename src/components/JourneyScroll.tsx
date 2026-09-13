@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { journeyStages } from "@/lib/data";
 
@@ -42,9 +43,21 @@ function Stage({
           animate={{ opacity: active ? 1 : 0.3, scale: active ? 1 : 0.94 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="aspect-4/5 rounded overflow-hidden relative flex items-end p-6"
-          style={{ background: stage.tint }}
+          style={stage.image ? undefined : { background: stage.tint }}
         >
-          <span className="font-serif text-[15px] text-white">
+          {stage.image && (
+            <>
+              <Image
+                src={stage.image}
+                alt={stage.title}
+                fill
+                sizes="(min-width: 768px) 40vw, 90vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
+            </>
+          )}
+          <span className="relative font-serif text-[15px] text-white">
             {isLast ? "Welcome to the alumni network" : stage.title}
           </span>
         </motion.div>
