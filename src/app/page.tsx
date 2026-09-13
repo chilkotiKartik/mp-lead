@@ -6,6 +6,9 @@ import { Hero } from "@/components/Hero";
 import { Intro } from "@/components/Intro";
 import { Reveal, RevealStagger, RevealItem } from "@/components/Reveal";
 import { Counter } from "@/components/Counter";
+import { Marquee } from "@/components/Marquee";
+import { TiltCard } from "@/components/TiltCard";
+import { RingBlob } from "@/components/RingBlob";
 import { stats, institutions, journeyStages, fellows, projects } from "@/lib/data";
 
 export default function Home() {
@@ -17,6 +20,16 @@ export default function Home() {
       <Nav dark />
       <main>
         <Hero />
+
+        <Marquee
+          items={[
+            "Batch 05 Applications Open",
+            "Legislative Exposure",
+            "Administrative Development",
+            "62% Women Fellows",
+            "18 States Represented",
+          ]}
+        />
 
         {/* STATS */}
         <section className="py-24 px-6 md:px-12 border-y border-line">
@@ -35,8 +48,10 @@ export default function Home() {
         </section>
 
         {/* ENTER THE INSTITUTIONS */}
-        <section className="py-36 px-6 md:px-12 bg-ink text-paper">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative py-36 px-6 md:px-12 bg-ink text-paper overflow-hidden">
+          <RingBlob className="-top-20 -right-20" color="var(--saffron)" size={480} />
+          <RingBlob className="bottom-0 -left-24" color="var(--green)" size={360} />
+          <div className="relative max-w-6xl mx-auto">
             <Reveal className="flex flex-col md:flex-row md:justify-between md:items-end gap-10 mb-16">
               <div>
                 <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron mb-3.5">
@@ -54,7 +69,7 @@ export default function Home() {
             <RevealStagger className="grid md:grid-cols-3 gap-6">
               {institutions.map((inst) => (
                 <RevealItem key={inst.name}>
-                  <div className="group relative aspect-3/4 rounded overflow-hidden cursor-pointer">
+                  <TiltCard maxTilt={8} className="group aspect-3/4 rounded overflow-hidden cursor-pointer">
                     <Image
                       src={inst.image}
                       alt={inst.name}
@@ -71,7 +86,7 @@ export default function Home() {
                         {inst.tag}
                       </span>
                     </div>
-                  </div>
+                  </TiltCard>
                 </RevealItem>
               ))}
             </RevealStagger>
@@ -141,21 +156,23 @@ export default function Home() {
             {fellows.slice(0, 5).map((f) => (
               <RevealItem key={f.id} className="snap-start shrink-0 w-67">
                 <Link href={`/fellows/${f.id}`} className="group block">
-                  <div
-                    className="relative w-67 h-85 rounded-[3px] overflow-hidden flex items-end transition-[border-radius] duration-500 group-hover:rounded-br-[40px]"
-                    style={{ background: f.tint }}
-                  >
+                  <TiltCard maxTilt={6} className="w-67 h-85">
                     <div
-                      aria-hidden
-                      className="absolute inset-0 flex items-center justify-center font-serif text-[120px] font-medium text-white/15 transition-transform duration-600 group-hover:scale-110 group-hover:-translate-y-1.5"
+                      className="w-67 h-85 rounded-[3px] overflow-hidden flex items-end transition-[border-radius] duration-500 group-hover:rounded-br-[40px]"
+                      style={{ background: f.tint }}
                     >
-                      {f.initial}
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 flex items-center justify-center font-serif text-[120px] font-medium text-white/15 transition-transform duration-600 group-hover:scale-110 group-hover:-translate-y-1.5"
+                      >
+                        {f.initial}
+                      </div>
+                      <div className="relative p-5 text-white">
+                        <h4 className="font-serif font-medium text-[19px] mb-1">Fellow — {f.batch}</h4>
+                        <span className="text-xs text-white/70">{f.state}</span>
+                      </div>
                     </div>
-                    <div className="relative p-5 text-white">
-                      <h4 className="font-serif font-medium text-[19px] mb-1">Fellow — {f.batch}</h4>
-                      <span className="text-xs text-white/70">{f.state}</span>
-                    </div>
-                  </div>
+                  </TiltCard>
                   <div className="pt-3.5 text-[13px] text-ink-soft opacity-0 -translate-y-1.5 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
                     {f.focus} · Mentor: [Mentor Name]
                   </div>
@@ -226,11 +243,12 @@ export default function Home() {
         </section>
 
         {/* IMPACT */}
-        <section className="py-40 px-6 md:px-12 bg-ink text-paper text-center">
-          <h2 className="text-sm tracking-[0.2em] uppercase text-saffron font-bold mb-14">
+        <section className="relative py-40 px-6 md:px-12 bg-ink text-paper text-center overflow-hidden">
+          <RingBlob className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" color="var(--saffron)" size={700} />
+          <h2 className="relative text-sm tracking-[0.2em] uppercase text-saffron font-bold mb-14">
             The Fellowship, In Numbers
           </h2>
-          <RevealStagger className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+          <RevealStagger className="relative max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
             {[...stats.slice(0, 3), { value: 18, suffix: "", label: "States Represented" }].map(
               (s) => (
                 <RevealItem key={s.label}>
