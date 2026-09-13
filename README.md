@@ -1,32 +1,41 @@
-# React + TypeScript + Vite
+# MP LEAD
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Legislative Exposure & Administrative Development Fellowship — a Next.js
+(App Router) site with real, working functionality: an animated public
+site, a fellow portal dashboard, and an admin command centre that reads
+live application data.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Next.js 16 (App Router, Server Actions)
+- Tailwind CSS v4
+- `motion` (Framer Motion) for animation
+- A lightweight file-backed store (`src/lib/applications.ts`) for the
+  application pipeline — swap for a real database before production.
 
-## React Compiler
+## Develop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Structure
+
+- `src/app/(marketing pages)` — homepage, fellowship, journey, fellows,
+  projects, alumni, contact, media
+- `src/app/apply` — multi-step application form (Server Action-backed,
+  persists to disk) + `/apply/track` status lookup
+- `src/app/portal` — fellow portal dashboard (static demo data)
+- `src/app/admin` — admin command centre (reads live application data)
+- `src/lib/data.ts` — public content (stats, journey stages, fellows,
+  projects)
+- `design/` — earlier static design-canvas concept exploration
+
+## Honest scope notes
+
+This is a real full-stack app (working forms, persistence, live
+dashboards) but not the complete production system described in the
+original brief — there is no authentication/RBAC, mentor/reviewer
+portals, CMS, or real database yet. Photography is placeholder
+color-blocked treatment pending cleared real photography.
