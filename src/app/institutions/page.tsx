@@ -12,7 +12,7 @@ export default function InstitutionsPage() {
   return (
     <>
       <Nav dark />
-      <main className="bg-ink text-paper">
+      <main>
         {/* Full-bleed opening plate */}
         <section className="relative flex min-h-[78vh] items-end overflow-hidden px-6 pt-40 pb-16 md:px-12">
           <Image
@@ -38,16 +38,16 @@ export default function InstitutionsPage() {
         </section>
 
         {/* Four beats — numbered, oversized, editorial */}
-        <section className="border-t border-white/10 px-6 py-28 md:px-12">
+        <section className="border-t border-line px-6 py-28 md:px-12">
           <div className="mx-auto max-w-6xl">
             {exposureBeats.map((b, i) => (
               <Reveal key={b.beat}>
-                <div className="grid gap-6 border-b border-white/10 py-12 md:grid-cols-[120px_1fr_1.2fr] md:gap-12">
-                  <span className="grotesque text-[44px] leading-none font-extrabold text-saffron/70">
+                <div className="grid gap-6 border-b border-line py-12 md:grid-cols-[120px_1fr_1.2fr] md:gap-12">
+                  <span className="grotesque text-[44px] leading-none font-extrabold text-saffron-deep">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h2 className="display text-[clamp(30px,4vw,52px)]">{b.beat}</h2>
-                  <p className="max-w-lg self-center text-[15px] leading-relaxed text-paper/55">
+                  <p className="max-w-lg self-center text-[15px] leading-relaxed text-ink-soft">
                     {b.body}
                   </p>
                 </div>
@@ -74,10 +74,10 @@ export default function InstitutionsPage() {
                     className="object-cover grayscale-[45%] transition-[transform,filter] duration-[900ms] ease-out group-hover:scale-105 group-hover:grayscale-0"
                   />
                 </div>
-                <div className="flex flex-col justify-center px-6 py-16 md:px-16 [direction:ltr]">
-                  <span className="eyebrow mb-4 text-saffron">{inst.tag}</span>
+                <div className="flex flex-col justify-center bg-paper-dim px-6 py-16 md:px-16 [direction:ltr]">
+                  <span className="eyebrow mb-4 text-saffron-deep">{inst.tag}</span>
                   <h3 className="display mb-5 text-[clamp(32px,4.6vw,64px)]">{inst.name}</h3>
-                  <p className="max-w-md text-[15px] leading-relaxed text-paper/55">
+                  <p className="max-w-md text-[15px] leading-relaxed text-ink-soft">
                     Fellows engage here as students of process — observing how decisions
                     move through the institution, not performing politics within it.
                   </p>

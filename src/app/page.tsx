@@ -141,18 +141,18 @@ export default function Home() {
         </section>
 
         {/* FELLOW STORIES */}
-        <section className="bg-ink py-32 text-paper">
+        <section className="bg-paper-dim py-32">
           <div className="mx-auto max-w-6xl px-6 md:px-12">
             <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <div className="eyebrow mb-4 text-saffron">Fellow Stories</div>
+                <div className="eyebrow mb-4 text-saffron-deep">Fellow Stories</div>
                 <h2 className="display text-[clamp(36px,6vw,82px)]">
-                  Forty voices. <span className="italic text-saffron">One republic.</span>
+                  Forty voices. <span className="italic text-saffron-deep">One republic.</span>
                 </h2>
               </div>
               <Link
                 href="/fellows"
-                className="grotesque rounded-full border border-paper/35 px-7 py-3.5 text-[13px] font-bold tracking-wide uppercase transition-colors hover:bg-paper hover:text-ink"
+                className="grotesque rounded-full border border-ink px-7 py-3.5 text-[13px] font-bold tracking-wide uppercase transition-colors hover:bg-ink hover:text-paper"
               >
                 View directory
               </Link>
@@ -180,7 +180,7 @@ export default function Home() {
                       </div>
                     </div>
                   </TiltCard>
-                  <div className="grotesque pt-3.5 text-[12px] font-semibold tracking-wide text-paper/40 uppercase opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <div className="grotesque pt-3.5 text-[12px] font-semibold tracking-wide text-ink-soft uppercase opacity-0 transition-all duration-300 group-hover:opacity-100">
                     {f.focus}
                   </div>
                 </Link>

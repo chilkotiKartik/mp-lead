@@ -22,7 +22,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="relative overflow-hidden bg-ink py-16 md:py-24">
+    <section className="relative overflow-hidden bg-paper-dim py-16 md:py-24">
       {/* Backplate: the hovered category's photograph, cross-fading. */}
       <div className="pointer-events-none absolute inset-0">
         {categories.map((c, i) => (
@@ -30,7 +30,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
             key={c.href}
             className="absolute inset-0"
             initial={false}
-            animate={{ opacity: active === i ? 0.38 : 0 }}
+            animate={{ opacity: active === i ? 0.16 : 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <Image
@@ -43,18 +43,18 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
             />
           </motion.div>
         ))}
-        <div className="absolute inset-0 bg-linear-to-r from-ink via-ink/70 to-ink" />
+        <div className="absolute inset-0 bg-linear-to-r from-paper-dim via-paper-dim/75 to-paper-dim" />
       </div>
 
       <div className="relative">
         <div className="mb-9 flex items-end justify-between gap-6 px-6 md:px-12">
           <div>
-            <div className="eyebrow mb-2.5 text-saffron">Explore MP LEAD</div>
-            <h2 className="display text-[clamp(30px,4vw,54px)] text-paper">
+            <div className="eyebrow mb-2.5 text-saffron-deep">Explore MP LEAD</div>
+            <h2 className="display text-[clamp(30px,4vw,54px)]">
               Eight ways in.
             </h2>
           </div>
-          <p className="hidden max-w-xs text-[13.5px] leading-relaxed text-paper/50 md:block">
+          <p className="hidden max-w-xs text-[13.5px] leading-relaxed text-ink-soft md:block">
             The fellowship, the institutions, the people and the work — each its own
             way into MP LEAD.
           </p>
@@ -121,15 +121,17 @@ function RailItem({
               alt={category.label}
               fill
               sizes="(min-width: 768px) 276px, 248px"
-              className="object-cover grayscale transition-[filter,transform] duration-700 ease-out group-hover/rail:scale-105 group-hover/rail:grayscale-0"
+              className="object-cover grayscale-[35%] transition-[filter,transform] duration-700 ease-out group-hover/rail:scale-105 group-hover/rail:grayscale-0"
             />
           </motion.div>
-          <div className="absolute inset-0 bg-linear-to-t from-ink/85 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-ink/45 via-transparent to-transparent" />
+          {/* Crown scrim keeps the numeral legible over pale skies and domes. */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-ink/40 to-transparent" />
 
-          {/* Index numeral, oversized, clipped by the arch. */}
+          {/* Index numeral, seated in the crown of the arch. */}
           <span
             aria-hidden
-            className="grotesque absolute top-5 left-1/2 -translate-x-1/2 text-[13px] font-bold text-paper/45"
+            className="grotesque absolute top-5 left-1/2 -translate-x-1/2 text-[13px] font-bold text-paper"
           >
             {String(index + 1).padStart(2, "0")}
           </span>
@@ -137,19 +139,19 @@ function RailItem({
 
         <div className="pt-4">
           <div className="flex items-baseline gap-2">
-            <h3 className="display text-[26px] text-paper transition-colors duration-300 group-hover/rail:text-saffron">
+            <h3 className="display text-[26px] transition-colors duration-300 group-hover/rail:text-saffron-deep">
               {category.label}
             </h3>
             <motion.span
               aria-hidden
-              className="text-saffron"
+              className="text-saffron-deep"
               initial={false}
               whileHover={{ x: 3 }}
             >
               ↗
             </motion.span>
           </div>
-          <p className="mt-1 text-[12.5px] leading-snug text-paper/45">
+          <p className="mt-1 text-[12.5px] leading-snug text-ink-soft">
             {category.caption}
           </p>
         </div>
