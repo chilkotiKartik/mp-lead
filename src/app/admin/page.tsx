@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { listApplications } from "@/lib/applications";
 import { AnimatedBar } from "@/components/AnimatedBar";
+import { LiveBadge } from "@/components/LiveBadge";
 
 export const metadata: Metadata = { title: "Admin Command Centre — MP LEAD" };
 export const dynamic = "force-dynamic";
@@ -61,9 +62,12 @@ export default async function AdminPage() {
       </aside>
 
       <main className="p-6 md:p-9 pb-16">
-        <div className="mb-7">
-          <h1 className="font-serif font-medium text-2xl md:text-[26px]">Admin Command Centre</h1>
-          <p className="text-ink-soft text-[13.5px] mt-0.5">Batch 05 selection cycle · live data</p>
+        <div className="mb-7 flex flex-wrap items-center gap-3.5">
+          <div>
+            <h1 className="font-serif font-medium text-2xl md:text-[26px]">Admin Command Centre</h1>
+            <p className="text-ink-soft text-[13.5px] mt-0.5">Batch 05 selection cycle</p>
+          </div>
+          <LiveBadge label="Live Data" />
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4.5 mb-6">

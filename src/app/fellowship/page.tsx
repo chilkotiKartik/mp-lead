@@ -35,18 +35,22 @@ const pillars = [
   {
     title: "Legislative Exposure",
     body: "Structured engagement with parliamentary process and constitutional institutions — observation, not performance.",
+    color: "var(--saffron)",
   },
   {
     title: "Administrative Development",
     body: "Practical grounding in how policy moves through administration, from ministries to district offices.",
+    color: "var(--green)",
   },
   {
     title: "Field Research",
     body: "A district-level project, from problem framing through fieldwork to a final policy-relevant deliverable.",
+    color: "var(--blue)",
   },
   {
     title: "Mentorship",
     body: "One-on-one guidance from an experienced practitioner throughout the fellowship.",
+    color: "var(--maroon)",
   },
 ];
 
@@ -67,10 +71,18 @@ export default function FellowshipPage() {
           real field project.
         </p>
         <div className="grid sm:grid-cols-2 gap-8 mb-24">
-          {pillars.map((p) => (
+          {pillars.map((p, i) => (
             <Reveal key={p.title}>
-              <div className="border-t border-line pt-5">
-                <h3 className="font-serif text-xl font-medium mb-2">{p.title}</h3>
+              <div
+                className="border-t-2 pt-5 transition-transform duration-300 hover:-translate-y-1"
+                style={{ borderColor: p.color }}
+              >
+                <div className="flex items-baseline gap-3 mb-2">
+                  <span className="font-serif text-sm" style={{ color: p.color }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-serif text-xl font-medium">{p.title}</h3>
+                </div>
                 <p className="text-ink-soft text-[15px] leading-relaxed">{p.body}</p>
               </div>
             </Reveal>
