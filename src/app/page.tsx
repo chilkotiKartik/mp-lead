@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -9,11 +10,10 @@ import { Counter } from "@/components/Counter";
 import { Marquee } from "@/components/Marquee";
 import { TiltCard } from "@/components/TiltCard";
 import { RingBlob } from "@/components/RingBlob";
-import { stats, institutions, journeyStages, fellows, projects } from "@/lib/data";
+import { CategoryRail } from "@/components/CategoryRail";
+import { stats, institutions, journeyStages, fellows, projects, categories } from "@/lib/data";
 
 export default function Home() {
-  const journeyLabels = journeyStages.map((s) => s.title);
-
   return (
     <>
       <Intro />
@@ -31,60 +31,62 @@ export default function Home() {
           ]}
         />
 
-        {/* STATS */}
-        <section className="py-24 px-6 md:px-12 border-y border-line">
-          <RevealStagger className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {stats.map((s) => (
-              <RevealItem key={s.label}>
-                <div className="font-serif font-medium text-[clamp(36px,4.4vw,64px)] leading-none">
+        {/* STATS — oversized grotesque numerals, asymmetric */}
+        <section className="border-b border-line px-6 py-24 md:px-12">
+          <RevealStagger className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-14 md:grid-cols-4">
+            {stats.map((s, i) => (
+              <RevealItem key={s.label} className={i % 2 === 1 ? "md:pt-10" : ""}>
+                <div className="grotesque text-[clamp(44px,6vw,86px)] leading-[0.85] font-extrabold">
                   <Counter value={s.value} suffix={s.suffix} />
                 </div>
-                <div className="mt-2.5 text-[13px] uppercase tracking-wider text-ink-soft font-semibold">
-                  {s.label}
+                <div className="mt-3 flex items-center gap-2.5">
+                  <span className="h-px w-6 bg-saffron" />
+                  <span className="eyebrow text-ink-soft">{s.label}</span>
                 </div>
               </RevealItem>
             ))}
           </RevealStagger>
         </section>
 
-        {/* ENTER THE INSTITUTIONS */}
-        <section className="relative py-36 px-6 md:px-12 bg-ink text-paper overflow-hidden">
-          <RingBlob className="-top-20 -right-20" color="var(--saffron)" size={480} />
-          <RingBlob className="bottom-0 -left-24" color="var(--green)" size={360} />
-          <div className="relative max-w-6xl mx-auto">
-            <Reveal className="flex flex-col md:flex-row md:justify-between md:items-end gap-10 mb-16">
+        {/* SIGNATURE CATEGORY RAIL */}
+        <CategoryRail categories={[...categories]} />
+
+        {/* INSTITUTIONS — access → observation → learning → perspective */}
+        <section className="relative overflow-hidden bg-paper-dim px-6 py-32 md:px-12">
+          <RingBlob className="-top-24 -right-24" color="var(--saffron)" size={460} />
+          <div className="relative mx-auto max-w-6xl">
+            <Reveal className="mb-16 grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-end">
               <div>
-                <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron mb-3.5">
-                  Enter the Institutions
-                </div>
-                <h2 className="font-serif font-medium text-[clamp(32px,4.2vw,56px)] max-w-2xl">
-                  Exposure to the offices that shape the republic.
+                <div className="eyebrow mb-4 text-saffron-deep">Institutional Exposure</div>
+                <h2 className="display text-[clamp(36px,6vw,82px)]">
+                  Access. <span className="italic text-saffron-deep">Observation.</span>
+                  <br />
+                  Learning. Perspective.
                 </h2>
               </div>
-              <p className="max-w-sm text-paper/65 text-[15px] leading-relaxed">
-                Fellows engage directly with constitutional offices and ministries — observing
-                process, not performing politics. Exposure, learning, perspective.
+              <p className="text-[15px] leading-relaxed text-ink-soft">
+                Fellows engage directly with constitutional offices and ministries —
+                observing process, not performing politics.
               </p>
             </Reveal>
-            <RevealStagger className="grid md:grid-cols-3 gap-6">
-              {institutions.map((inst) => (
-                <RevealItem key={inst.name}>
-                  <TiltCard maxTilt={8} className="group aspect-3/4 rounded overflow-hidden cursor-pointer">
+
+            <RevealStagger className="grid gap-5 md:grid-cols-3">
+              {institutions.map((inst, i) => (
+                <RevealItem key={inst.name} className={i === 1 ? "md:-mt-12" : ""}>
+                  <TiltCard maxTilt={8} className="group aspect-3/4 overflow-hidden rounded-t-[120px] rounded-b-md">
                     <Image
                       src={inst.image}
                       alt={inst.name}
                       fill
                       sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover grayscale-[60%] transition-[transform,filter] duration-700 ease-out group-hover:scale-110 group-hover:grayscale-0"
+                      className="object-cover grayscale-[55%] transition-[transform,filter] duration-700 ease-out group-hover:scale-110 group-hover:grayscale-0"
                     />
                     <div className="absolute inset-0 flex flex-col justify-end p-6">
-                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/90" />
-                      <h3 className="relative text-[22px] font-medium text-white mb-1.5">
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-ink/90" />
+                      <h3 className="display relative mb-1.5 text-[26px] text-paper">
                         {inst.name}
                       </h3>
-                      <span className="relative text-xs uppercase tracking-wider text-white/70">
-                        {inst.tag}
-                      </span>
+                      <span className="eyebrow relative text-paper/60">{inst.tag}</span>
                     </div>
                   </TiltCard>
                 </RevealItem>
@@ -94,87 +96,92 @@ export default function Home() {
         </section>
 
         {/* JOURNEY PREVIEW */}
-        <section className="py-36 px-6 md:px-12">
-          <div className="max-w-6xl mx-auto">
+        <section className="px-6 py-32 md:px-12">
+          <div className="mx-auto max-w-6xl">
             <Reveal className="mb-16">
-              <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-3.5">
-                The Fellowship Journey
-              </div>
-              <h2 className="font-serif font-medium text-[clamp(32px,4.2vw,56px)] max-w-xl">
-                Nine stages. One transformation.
+              <div className="eyebrow mb-4 text-saffron-deep">The Fellowship Journey</div>
+              <h2 className="display max-w-2xl text-[clamp(36px,6vw,82px)]">
+                Nine stages.
+                <br />
+                <span className="italic">One transformation.</span>
               </h2>
             </Reveal>
+
             <Reveal>
-              <div className="relative flex justify-between px-1">
-                <div className="absolute top-[9px] left-0 right-0 h-px bg-line" />
-                {journeyLabels.map((label, i) => (
-                  <div key={label} className="relative flex flex-col items-center gap-3.5 flex-1">
+              <div className="relative -mx-6 flex snap-x gap-2 overflow-x-auto px-6 md:mx-0 md:justify-between md:overflow-visible md:px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="absolute top-[9px] right-6 left-6 h-px bg-line md:right-0 md:left-0" />
+                {journeyStages.map((s, i) => (
+                  <div
+                    key={s.title}
+                    className="relative flex w-16 shrink-0 snap-start flex-col items-center gap-3.5 md:w-auto md:flex-1"
+                  >
                     <div
-                      className={`w-[19px] h-[19px] rounded-full border ${
-                        i < 3 ? "bg-saffron border-saffron-deep" : "bg-paper border-ink"
+                      className={`h-[19px] w-[19px] shrink-0 rounded-full border transition-colors ${
+                        i < 3 ? "border-saffron-deep bg-saffron" : "border-ink bg-paper"
                       }`}
                     />
-                    <div className="text-[10px] md:text-[11px] text-center uppercase tracking-wide font-bold text-ink-soft max-w-16 md:max-w-22">
-                      {label}
+                    <div className="grotesque max-w-16 text-center text-[10px] font-bold tracking-wide text-ink-soft uppercase md:max-w-22 md:text-[11px]">
+                      {s.title}
                     </div>
                   </div>
                 ))}
               </div>
             </Reveal>
-            <div className="text-center mt-14">
+
+            <div className="mt-16 text-center">
               <Link
                 href="/journey"
-                className="rounded-full border border-ink px-7 py-4 text-sm font-bold transition-colors hover:bg-ink hover:text-paper"
+                className="grotesque group inline-flex items-center gap-2 rounded-full border border-ink px-8 py-4 text-[13px] font-bold tracking-wide uppercase transition-colors hover:bg-ink hover:text-paper"
               >
-                Experience the Full Journey →
+                Experience the full journey
+                <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </div>
         </section>
 
         {/* FELLOW STORIES */}
-        <section className="py-36 bg-paper-dim">
-          <div className="max-w-6xl mx-auto px-6 md:px-12">
-            <Reveal className="flex flex-wrap justify-between items-end gap-6 mb-14">
+        <section className="bg-ink py-32 text-paper">
+          <div className="mx-auto max-w-6xl px-6 md:px-12">
+            <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-3.5">
-                  Fellow Stories
-                </div>
-                <h2 className="font-serif font-medium text-[clamp(32px,4.2vw,56px)]">
-                  Forty voices. One republic.
+                <div className="eyebrow mb-4 text-saffron">Fellow Stories</div>
+                <h2 className="display text-[clamp(36px,6vw,82px)]">
+                  Forty voices. <span className="italic text-saffron">One republic.</span>
                 </h2>
               </div>
               <Link
                 href="/fellows"
-                className="rounded-full border border-ink px-7 py-4 text-sm font-bold transition-colors hover:bg-ink hover:text-paper"
+                className="grotesque rounded-full border border-paper/35 px-7 py-3.5 text-[13px] font-bold tracking-wide uppercase transition-colors hover:bg-paper hover:text-ink"
               >
-                View Directory
+                View directory
               </Link>
             </Reveal>
           </div>
-          <RevealStagger className="flex gap-5 overflow-x-auto pb-3 px-6 md:px-12 snap-x snap-mandatory [scrollbar-width:none]">
-            {fellows.slice(0, 5).map((f) => (
-              <RevealItem key={f.id} className="snap-start shrink-0 w-67">
+
+          <RevealStagger className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-6 px-6 pb-4 md:scroll-pl-12 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {fellows.slice(0, 6).map((f) => (
+              <RevealItem key={f.id} className="w-67 shrink-0 snap-start">
                 <Link href={`/fellows/${f.id}`} className="group block">
-                  <TiltCard maxTilt={6} className="w-67 h-85">
+                  <TiltCard maxTilt={6} className="h-85 w-67">
                     <div
-                      className="w-67 h-85 rounded-[3px] overflow-hidden flex items-end transition-[border-radius] duration-500 group-hover:rounded-br-[40px]"
+                      className="flex h-85 w-67 items-end overflow-hidden rounded-t-[110px] rounded-b-md transition-[border-radius] duration-500 group-hover:rounded-t-md group-hover:rounded-br-[60px]"
                       style={{ background: f.tint }}
                     >
                       <div
                         aria-hidden
-                        className="absolute inset-0 flex items-center justify-center font-serif text-[120px] font-medium text-white/15 transition-transform duration-600 group-hover:scale-110 group-hover:-translate-y-1.5"
+                        className="display absolute inset-0 flex items-center justify-center text-[130px] text-paper/15 transition-transform duration-700 group-hover:scale-110"
                       >
                         {f.initial}
                       </div>
-                      <div className="relative p-5 text-white">
-                        <h4 className="font-serif font-medium text-[19px] mb-1">Fellow — {f.batch}</h4>
-                        <span className="text-xs text-white/70">{f.state}</span>
+                      <div className="relative p-5">
+                        <h4 className="display text-[21px] text-paper">Fellow — {f.batch}</h4>
+                        <span className="eyebrow text-paper/50">{f.state}</span>
                       </div>
                     </div>
                   </TiltCard>
-                  <div className="pt-3.5 text-[13px] text-ink-soft opacity-0 -translate-y-1.5 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                    {f.focus} · Mentor: [Mentor Name]
+                  <div className="grotesque pt-3.5 text-[12px] font-semibold tracking-wide text-paper/40 uppercase opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    {f.focus}
                   </div>
                 </Link>
               </RevealItem>
@@ -183,57 +190,48 @@ export default function Home() {
         </section>
 
         {/* PROJECTS */}
-        <section className="py-36 px-6 md:px-12">
-          <div className="max-w-6xl mx-auto">
+        <section className="px-6 py-32 md:px-12">
+          <div className="mx-auto max-w-6xl">
             <Reveal className="mb-20">
-              <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-3.5">
-                Field Projects
-              </div>
-              <h2 className="font-serif font-medium text-[clamp(32px,4.2vw,56px)]">
-                Research that meets the ground.
+              <div className="eyebrow mb-4 text-saffron-deep">Field Projects</div>
+              <h2 className="display max-w-2xl text-[clamp(36px,6vw,82px)]">
+                Research that <span className="italic">meets the ground.</span>
               </h2>
             </Reveal>
+
             <div className="flex flex-col gap-28">
               {projects.map((p, i) => (
                 <Reveal key={p.id}>
                   <div
-                    className={`grid md:grid-cols-2 gap-10 md:gap-14 items-center ${
+                    className={`grid items-center gap-10 md:grid-cols-2 md:gap-16 ${
                       i % 2 === 1 ? "md:[direction:rtl]" : ""
                     }`}
                   >
-                    <div
-                      className="relative aspect-4/3 rounded overflow-hidden [direction:ltr]"
-                      style={{ background: p.tint }}
-                    >
-                      <span className="absolute top-5 left-5 bg-paper/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider">
-                        {p.tag}
-                      </span>
-                    </div>
+                    <TiltCard maxTilt={6} className="aspect-4/3 [direction:ltr]">
+                      <div
+                        className="h-full w-full overflow-hidden rounded-md"
+                        style={{ background: p.tint }}
+                      >
+                        <span className="eyebrow absolute top-5 left-5 rounded-full bg-paper/90 px-3.5 py-1.5 text-ink">
+                          {p.tag}
+                        </span>
+                      </div>
+                    </TiltCard>
                     <div className="[direction:ltr]">
-                      <h3 className="font-serif font-medium text-[clamp(24px,2.6vw,34px)] mb-3.5">
-                        {p.title}
-                      </h3>
-                      <p className="text-ink-soft leading-relaxed text-[15px] mb-5 max-w-md">
+                      <h3 className="display mb-4 text-[clamp(28px,3.4vw,44px)]">{p.title}</h3>
+                      <p className="mb-7 max-w-md text-[15px] leading-relaxed text-ink-soft">
                         {p.body}
                       </p>
-                      <div className="flex gap-7 mb-6">
+                      <div className="flex gap-8">
                         {p.figures.map((f) => (
                           <div key={f.label}>
-                            <span className="block font-serif text-[26px] font-medium">
+                            <span className="grotesque block text-[32px] leading-none font-extrabold">
                               {f.value}
                             </span>
-                            <small className="text-[11px] uppercase tracking-wide text-ink-soft">
-                              {f.label}
-                            </small>
+                            <span className="eyebrow mt-1.5 block text-ink-soft">{f.label}</span>
                           </div>
                         ))}
                       </div>
-                      <Link
-                        href="/projects"
-                        className="rounded-full border border-ink px-6 py-3.5 text-sm font-bold transition-colors hover:bg-ink hover:text-paper"
-                      >
-                        Read the case study →
-                      </Link>
                     </div>
                   </div>
                 </Reveal>
@@ -243,47 +241,56 @@ export default function Home() {
         </section>
 
         {/* IMPACT */}
-        <section className="relative py-40 px-6 md:px-12 bg-ink text-paper text-center overflow-hidden">
-          <RingBlob className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" color="var(--saffron)" size={700} />
-          <h2 className="relative text-sm tracking-[0.2em] uppercase text-saffron font-bold mb-14">
-            The Fellowship, In Numbers
-          </h2>
-          <RevealStagger className="relative max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[...stats.slice(0, 3), { value: 18, suffix: "", label: "States Represented" }].map(
-              (s) => (
-                <RevealItem key={s.label}>
-                  <div className="font-serif font-medium text-[clamp(48px,6.6vw,96px)] leading-none">
-                    <Counter value={s.value} suffix={s.suffix} />
-                  </div>
-                  <div className="mt-3 text-[13px] uppercase tracking-wider text-paper/60">
-                    {s.label}
-                  </div>
-                </RevealItem>
-              )
-            )}
-          </RevealStagger>
+        <section className="relative overflow-hidden bg-ink px-6 py-36 text-paper md:px-12">
+          <RingBlob
+            className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            color="var(--saffron)"
+            size={720}
+          />
+          <div className="relative mx-auto max-w-5xl">
+            <Reveal className="mb-16 text-center">
+              <div className="eyebrow text-saffron">The Fellowship, In Numbers</div>
+            </Reveal>
+            <RevealStagger className="grid grid-cols-2 gap-10 md:grid-cols-4">
+              {[...stats.slice(0, 3), { value: 18, suffix: "", label: "States Represented" }].map(
+                (s) => (
+                  <RevealItem key={s.label} className="text-center">
+                    <div className="grotesque text-[clamp(54px,8vw,112px)] leading-[0.85] font-extrabold">
+                      <Counter value={s.value} suffix={s.suffix} />
+                    </div>
+                    <div className="eyebrow mt-4 text-paper/45">{s.label}</div>
+                  </RevealItem>
+                )
+              )}
+            </RevealStagger>
+          </div>
         </section>
 
         {/* CTA */}
-        <section className="py-40 px-6 md:px-12 text-center">
-          <Reveal className="flex justify-center">
-            <span className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-6">
-              Applications for Batch 05 Open
-            </span>
-          </Reveal>
-          <Reveal>
-            <h2 className="font-serif font-medium text-[clamp(34px,5vw,64px)] max-w-3xl mx-auto mb-10">
-              Step into the institutions that run the republic.
-            </h2>
-          </Reveal>
-          <Reveal>
-            <Link
-              href="/apply"
-              className="inline-block rounded-full bg-ink text-paper px-8 py-4.5 text-sm font-bold transition-colors hover:bg-saffron-deep"
-            >
-              Start Your Application
-            </Link>
-          </Reveal>
+        <section className="relative overflow-hidden px-6 py-40 md:px-12">
+          <div className="mx-auto max-w-4xl text-center">
+            <Reveal>
+              <div className="eyebrow mb-8 text-saffron-deep">
+                Applications for Batch 05 Open
+              </div>
+            </Reveal>
+            <Reveal>
+              <h2 className="display mb-12 text-[clamp(40px,8vw,116px)]">
+                Step into the rooms
+                <br />
+                <span className="italic">where it happens.</span>
+              </h2>
+            </Reveal>
+            <Reveal>
+              <Link
+                href="/apply"
+                className="grotesque group inline-flex items-center gap-2.5 rounded-full bg-ink px-10 py-5 text-[14px] font-bold tracking-wide text-paper uppercase transition-colors hover:bg-saffron-deep"
+              >
+                Start your application
+                <ArrowUpRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </Reveal>
+          </div>
         </section>
       </main>
       <Footer />

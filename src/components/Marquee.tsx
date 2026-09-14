@@ -29,7 +29,7 @@ export function Marquee({
         {loop.map((item, i) => (
           <span
             key={i}
-            className={`flex items-center gap-10 font-serif text-2xl md:text-3xl font-medium italic ${
+            className={`display flex items-center gap-10 text-3xl italic md:text-4xl ${
               dark ? "text-paper/80" : "text-ink/70"
             }`}
           >

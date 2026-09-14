@@ -24,7 +24,7 @@ function Stage({
       className="min-h-screen flex items-center px-6 md:px-12 md:pl-28"
     >
       <div className="grid md:grid-cols-[110px_1fr_1fr] gap-8 md:gap-10 items-center w-full max-w-6xl mx-auto">
-        <div className="hidden md:block font-serif text-2xl text-paper/35">
+        <div className="hidden md:block display text-2xl text-paper/35">
           {String(index + 1).padStart(2, "0")}
         </div>
         <motion.div
@@ -34,7 +34,7 @@ function Stage({
           <span className="inline-block text-xs uppercase tracking-wider font-bold text-saffron border border-saffron/35 rounded-full px-3.5 py-1.5 mb-4">
             {stage.week}
           </span>
-          <h2 className="font-serif font-medium text-[clamp(30px,3.6vw,52px)] mb-4">
+          <h2 className="display text-[clamp(30px,3.6vw,52px)] mb-4">
             {stage.title}
           </h2>
           <p className="text-paper/60 text-[15px] leading-relaxed max-w-md">{stage.body}</p>
@@ -57,7 +57,7 @@ function Stage({
               <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
             </>
           )}
-          <span className="relative font-serif text-[15px] text-white">
+          <span className="relative display text-[15px] text-white">
             {isLast ? "Welcome to the alumni network" : stage.title}
           </span>
         </motion.div>
@@ -73,8 +73,8 @@ export function JourneyScroll() {
   return (
     <div className="relative bg-ink text-paper">
       <div className="sticky top-0 z-10 flex justify-between items-center px-6 md:px-12 py-6 bg-linear-to-b from-ink to-transparent">
-        <div className="font-serif text-lg">MP LEAD</div>
-        <div className="text-[11px] tracking-[0.2em] uppercase font-bold text-saffron">
+        <div className="display text-lg">MP LEAD</div>
+        <div className="eyebrow text-saffron">
           The Fellowship Journey
         </div>
       </div>

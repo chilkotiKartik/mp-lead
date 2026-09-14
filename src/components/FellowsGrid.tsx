@@ -56,12 +56,12 @@ export function FellowsGrid() {
                   </span>
                   <div
                     aria-hidden
-                    className="absolute inset-0 flex items-center justify-center font-serif text-8xl font-medium text-white/18"
+                    className="absolute inset-0 flex items-center justify-center display text-8xl font-medium text-white/18"
                   >
                     {f.initial}
                   </div>
                   <div className="relative p-4.5 text-white">
-                    <h4 className="font-serif font-medium text-[17px] mb-0.5">
+                    <h4 className="display text-[17px] mb-0.5">
                       Fellow — {f.batch}
                     </h4>
                     <span className="text-[11.5px] text-white/70">{f.state}</span>

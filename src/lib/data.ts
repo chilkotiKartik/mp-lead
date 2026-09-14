@@ -127,3 +127,14 @@ export const projects = [
     tint: "linear-gradient(155deg, oklch(0.45 0.1 200), oklch(0.26 0.07 210))",
   },
 ] as const;
+
+export const categories = [
+  { href: "/fellowship", label: "Fellowship", caption: "Two months, nine stages, one cohort", image: "/images/inst-south-block.jpg" },
+  { href: "/journey", label: "Journey", caption: "Orientation to graduation, scrolled", image: "/images/inst-rashtrapati-bhavan.jpg" },
+  { href: "/institutions", label: "Institutions", caption: "The offices that shape the republic", image: "/images/inst-supreme-court.jpg" },
+  { href: "/fellows", label: "Fellows", caption: "Forty voices, eighteen states", image: "/images/jaipur-hawa-mahal.jpg" },
+  { href: "/projects", label: "Projects", caption: "Field research that meets the ground", image: "/images/delhi-connaught.jpg" },
+  { href: "/events", label: "Events", caption: "Workshops, visits and convenings", image: "/images/hero-india-gate.jpg" },
+  { href: "/stories", label: "Stories", caption: "Dispatches from the cohort", image: "/images/hampi.jpg" },
+  { href: "/alumni", label: "Alumni", caption: "Where fellows go next", image: "/images/india-gate-night.jpg" },
+] as const;

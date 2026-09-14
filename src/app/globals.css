@@ -65,9 +65,11 @@
   --color-blue: var(--blue);
   --color-amber: var(--amber);
   --color-red: var(--red);
-  --font-serif: var(--font-newsreader);
+  --font-serif: var(--font-display);
+  --font-display: var(--font-display);
+  --font-grotesque: var(--font-grotesque);
   --font-sans: var(--font-manrope);
-  --font-heading: var(--font-manrope);
+  --font-heading: var(--font-grotesque);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -111,6 +113,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--paper);
   color: var(--ink);
@@ -131,6 +138,34 @@ body::after {
   opacity: 0.025;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Editorial display: tight, dramatic, optically balanced at huge sizes. */
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+
+/* Expressive grotesque for oversized numerals and condensed labels. */
+.grotesque {
+  font-family: var(--font-grotesque), system-ui, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.eyebrow {
+  font-family: var(--font-grotesque), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Mask-reveal primitive: the child slides up out of an overflow-clipped line. */
+.line-mask {
+  display: block;
+  overflow: hidden;
 }
 
 .gradient-underline {

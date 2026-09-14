@@ -42,7 +42,7 @@ export function ApplyForm() {
         <div className="text-xs uppercase tracking-wider font-bold text-saffron-deep mb-3">
           Application Submitted
         </div>
-        <h2 className="font-serif text-3xl font-medium mb-4">Thank you, {data.fullName.split(" ")[0]}.</h2>
+        <h2 className="display text-3xl font-medium mb-4">Thank you, {data.fullName.split(" ")[0]}.</h2>
         <p className="text-ink-soft mb-6 max-w-md mx-auto">
           Your application has been received. Save your reference ID to track its status.
         </p>

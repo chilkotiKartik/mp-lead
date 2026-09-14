@@ -9,10 +9,10 @@ export default function AlumniPage() {
     <>
       <Nav />
       <main className="pt-32 pb-24 px-6 md:px-12 max-w-3xl mx-auto w-full text-center">
-        <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-3">
+        <div className="eyebrow text-saffron-deep mb-3">
           Alumni Network
         </div>
-        <h1 className="font-serif font-medium text-[clamp(30px,4.4vw,52px)] mb-6">
+        <h1 className="display text-[clamp(30px,4.4vw,52px)] mb-6">
           Every fellow graduates into the network.
         </h1>
         <p className="text-ink-soft leading-relaxed">

@@ -36,7 +36,7 @@ export default async function AdminPage() {
   return (
     <div className="min-h-screen grid md:grid-cols-[236px_1fr] bg-paper text-ink">
       <aside className="hidden md:block bg-ink text-paper p-6 text-sm">
-        <div className="font-serif text-lg px-2 pb-5">MP LEAD Admin</div>
+        <div className="display text-lg px-2 pb-5">MP LEAD Admin</div>
         {navGroups.map((g) => (
           <div key={g.label} className="mb-1">
             <div className="text-[10px] uppercase tracking-wide text-paper/35 font-bold px-2.5 pt-3.5 pb-1.5">
@@ -64,7 +64,7 @@ export default async function AdminPage() {
       <main className="p-6 md:p-9 pb-16">
         <div className="mb-7 flex flex-wrap items-center gap-3.5">
           <div>
-            <h1 className="font-serif font-medium text-2xl md:text-[26px]">Admin Command Centre</h1>
+            <h1 className="display text-2xl md:text-[26px]">Admin Command Centre</h1>
             <p className="text-ink-soft text-[13.5px] mt-0.5">Batch 05 selection cycle</p>
           </div>
           <LiveBadge label="Live Data" />
@@ -183,7 +183,7 @@ function Kpi({
   return (
     <div className="bg-card border border-line rounded-xl p-4.5">
       <div className="text-[11.5px] text-ink-soft uppercase tracking-wide font-bold">{label}</div>
-      <div className="font-serif text-[28px] mt-1.5">{value}</div>
+      <div className="display text-[28px] mt-1.5">{value}</div>
       <div className={`text-[11.5px] mt-1 font-bold ${toneClass}`}>{delta}</div>
     </div>
   );

@@ -27,7 +27,7 @@ export default async function FellowProfilePage({
         <div className="grid md:grid-cols-[320px_1fr] gap-12 mt-8">
           <div
             aria-hidden
-            className="aspect-3/4 rounded overflow-hidden flex items-center justify-center font-serif text-9xl font-medium text-white/25"
+            className="aspect-3/4 rounded overflow-hidden flex items-center justify-center display text-9xl font-medium text-white/25"
             style={{ background: fellow.tint }}
           >
             {fellow.initial}
@@ -36,7 +36,7 @@ export default async function FellowProfilePage({
             <span className="inline-block text-xs uppercase tracking-wider font-bold bg-paper-dim px-3 py-1.5 rounded-full mb-4">
               {fellow.focus}
             </span>
-            <h1 className="font-serif font-medium text-[clamp(30px,4vw,48px)] mb-2">
+            <h1 className="display text-[clamp(30px,4vw,48px)] mb-2">
               Fellow — {fellow.batch}
             </h1>
             <p className="text-ink-soft mb-8">{fellow.state}</p>

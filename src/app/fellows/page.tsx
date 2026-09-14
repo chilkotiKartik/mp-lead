@@ -12,12 +12,12 @@ export default function FellowsPage() {
       <Nav />
       <main className="pt-32 pb-24 px-6 md:px-12 max-w-6xl mx-auto w-full">
         <div className="flex flex-wrap items-center gap-3 mb-3">
-          <span className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep">
+          <span className="eyebrow text-saffron-deep">
             Fellow Directory
           </span>
           <LiveBadge label="Batch 05 Applications Open" />
         </div>
-        <h1 className="font-serif font-medium text-[clamp(32px,4.6vw,58px)] mb-2">
+        <h1 className="display text-[clamp(32px,4.6vw,58px)] mb-2">
           Forty voices, one republic.
         </h1>
         <p className="text-ink-soft max-w-lg mb-9">

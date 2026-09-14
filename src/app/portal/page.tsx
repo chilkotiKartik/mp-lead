@@ -41,7 +41,7 @@ export default function PortalPage() {
   return (
     <div className="min-h-screen grid md:grid-cols-[248px_1fr] bg-paper text-ink">
       <aside className="hidden md:flex flex-col gap-1 bg-ink text-paper p-5">
-        <div className="font-serif text-lg px-2.5 pb-6">MP LEAD</div>
+        <div className="display text-lg px-2.5 pb-6">MP LEAD</div>
         {navItems.map((item, i) => (
           <div
             key={item}
@@ -57,10 +57,10 @@ export default function PortalPage() {
       <main className="p-6 md:p-10 pb-16">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="font-serif font-medium text-[28px]">Welcome back, [Fellow Name]</h1>
+            <h1 className="display text-[28px]">Welcome back, [Fellow Name]</h1>
             <p className="text-ink-soft text-sm mt-1">Batch 04 · Maharashtra · Day 34 of 60</p>
           </div>
-          <div className="w-10 h-10 rounded-full flex items-center justify-center font-serif font-semibold text-white bg-[linear-gradient(150deg,oklch(0.5_0.13_45),oklch(0.3_0.1_24))]">
+          <div className="w-10 h-10 rounded-full flex items-center justify-center display text-white bg-[linear-gradient(150deg,oklch(0.5_0.13_45),oklch(0.3_0.1_24))]">
             F
           </div>
         </div>
@@ -93,11 +93,11 @@ export default function PortalPage() {
             </h3>
             <div className="flex gap-5 text-center">
               <div className="flex-1">
-                <div className="font-serif text-[32px]">96%</div>
+                <div className="display text-[32px]">96%</div>
                 <div className="text-[11px] text-ink-soft uppercase">Overall</div>
               </div>
               <div className="flex-1">
-                <div className="font-serif text-[32px]">33</div>
+                <div className="display text-[32px]">33</div>
                 <div className="text-[11px] text-ink-soft uppercase">Present</div>
               </div>
             </div>

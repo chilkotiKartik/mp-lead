@@ -4,19 +4,20 @@ export function Footer() {
   return (
     <footer className="border-t border-line px-6 md:px-12 py-16">
       <div className="flex flex-wrap justify-between gap-10">
-        <div className="font-serif text-xl">MP LEAD</div>
+        <div className="display text-3xl">MP LEAD</div>
         <div className="flex flex-wrap gap-16">
           <div>
-            <h5 className="text-xs uppercase tracking-wider text-ink-soft mb-3.5">Explore</h5>
+            <h5 className="eyebrow text-ink-soft mb-4">Explore</h5>
             <div className="flex flex-col gap-2 text-sm">
               <Link href="/fellowship">Fellowship</Link>
               <Link href="/journey">Journey</Link>
               <Link href="/fellows">Fellows</Link>
               <Link href="/projects">Projects</Link>
+              <Link href="/institutions">Institutions</Link>
             </div>
           </div>
           <div>
-            <h5 className="text-xs uppercase tracking-wider text-ink-soft mb-3.5">Program</h5>
+            <h5 className="eyebrow text-ink-soft mb-4">Program</h5>
             <div className="flex flex-col gap-2 text-sm">
               <Link href="/apply">Apply</Link>
               <Link href="/alumni">Alumni</Link>
@@ -25,10 +26,12 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h5 className="text-xs uppercase tracking-wider text-ink-soft mb-3.5">Connect</h5>
+            <h5 className="eyebrow text-ink-soft mb-4">Connect</h5>
             <div className="flex flex-col gap-2 text-sm">
               <Link href="/contact">Contact</Link>
-              <Link href="/media">Media & Press</Link>
+              <Link href="/media">Media &amp; Press</Link>
+              <Link href="/events">Events</Link>
+              <Link href="/stories">Stories</Link>
             </div>
           </div>
         </div>

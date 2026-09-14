@@ -14,10 +14,10 @@ export default function ProjectsPage() {
       <Nav />
       <main className="pt-32 pb-24 w-full">
         <div className="px-6 md:px-12 max-w-6xl mx-auto mb-16">
-          <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-3">
+          <div className="eyebrow text-saffron-deep mb-3">
             Field Projects
           </div>
-          <h1 className="font-serif font-medium text-[clamp(32px,4.6vw,58px)] max-w-2xl">
+          <h1 className="display text-[clamp(32px,4.6vw,58px)] max-w-2xl">
             Research that meets the ground.
           </h1>
         </div>
@@ -44,7 +44,7 @@ export default function ProjectsPage() {
                     </div>
                   </TiltCard>
                   <div className="[direction:ltr]">
-                    <h3 className="font-serif font-medium text-[clamp(24px,2.6vw,34px)] mb-3.5">
+                    <h3 className="display text-[clamp(24px,2.6vw,34px)] mb-3.5">
                       {p.title}
                     </h3>
                     <p className="text-ink-soft leading-relaxed text-[15px] mb-6 max-w-md">
@@ -53,7 +53,7 @@ export default function ProjectsPage() {
                     <div className="flex gap-7">
                       {p.figures.map((f) => (
                         <div key={f.label}>
-                          <span className="block font-serif text-[26px] font-medium">
+                          <span className="block display text-[26px] font-medium">
                             {f.value}
                           </span>
                           <small className="text-[11px] uppercase tracking-wide text-ink-soft">

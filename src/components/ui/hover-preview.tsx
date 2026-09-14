@@ -27,7 +27,7 @@ function HoverLink({
 }) {
   return (
     <span
-      className="group/hoverlink relative inline-block cursor-pointer font-serif font-semibold text-ink"
+      className="group/hoverlink relative inline-block cursor-pointer display text-ink"
       onMouseEnter={(e) => onHoverStart(item, e)}
       onMouseMove={onHoverMove}
       onMouseLeave={onHoverEnd}
@@ -138,7 +138,7 @@ export function HoverPreview({
                   className="object-cover"
                 />
               </div>
-              <div className="px-2 pt-3 font-serif text-sm font-semibold text-paper">
+              <div className="px-2 pt-3 display text-sm font-semibold text-paper">
                 {active.title}
               </div>
               <div className="px-2 pb-2 text-xs text-paper/55">{active.subtitle}</div>

@@ -15,7 +15,7 @@ export default async function TrackPage({
     <>
       <Nav />
       <main className="pt-32 pb-24 px-6 md:px-12 max-w-xl mx-auto w-full">
-        <h1 className="font-serif font-medium text-[clamp(28px,3.6vw,40px)] mb-8">
+        <h1 className="display text-[clamp(28px,3.6vw,40px)] mb-8">
           Track Your Application
         </h1>
 

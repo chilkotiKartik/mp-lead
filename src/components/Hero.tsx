@@ -2,37 +2,43 @@
 
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { MagneticLink } from "./Magnetic";
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.15, delayChildren: 0.5 } },
-};
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-const line = {
-  hidden: { y: "110%" },
-  show: { y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] as const } },
-};
-
-const fade = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } },
-};
+// The headline states through: the page announces one idea, then the other.
+const PHASES = [
+  { a: "Legislative", b: "Exposure." },
+  { a: "Administrative", b: "Development." },
+] as const;
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const [phase, setPhase] = useState(0);
+
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.22]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0.55, 0.85]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const plateY = useTransform(scrollYProgress, [0, 1], ["0%", "24%"]);
+  const plateScale = useTransform(scrollYProgress, [0, 1], [1, 1.14]);
+  const stackY = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
+  const copyY = useTransform(scrollYProgress, [0, 1], ["0%", "38%"]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  useEffect(() => {
+    const t = setInterval(() => setPhase((p) => (p + 1) % PHASES.length), 4200);
+    return () => clearInterval(t);
+  }, []);
+
+  const current = PHASES[phase];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex flex-col justify-end overflow-hidden px-6 md:px-12 pt-40 pb-16">
-      <motion.div className="absolute inset-0 z-0" style={{ y: imgY, scale: imgScale }}>
+    <section
+      ref={ref}
+      className="relative flex min-h-screen flex-col justify-end overflow-hidden bg-ink px-6 pt-36 pb-14 md:px-12"
+    >
+      {/* Full-bleed plate */}
+      <motion.div className="absolute inset-0" style={{ y: plateY, scale: plateScale }}>
         <Image
           src="/images/hero-india-gate.jpg"
           alt="India Gate, New Delhi, at golden hour"
@@ -42,79 +48,141 @@ export function Hero() {
           className="object-cover"
         />
       </motion.div>
-      <motion.div
-        className="absolute inset-0 z-0 bg-linear-to-t from-ink via-ink/55 to-ink/20"
-        style={{ opacity: overlayOpacity }}
-      />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 0.1 }}
-        className="absolute inset-0 z-0 bg-linear-to-b from-ink/50 via-transparent to-transparent"
-      />
+      <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/70 to-ink/35" />
+      <div className="absolute inset-0 bg-linear-to-r from-ink/85 via-transparent to-transparent" />
 
+      {/* Overlapping portrait stack — image as composition, not a rectangle. */}
       <motion.div
-        className="relative z-10 text-paper"
-        variants={container}
-        initial="hidden"
-        animate="show"
-        style={{ y: contentY, opacity: contentOpacity }}
+        style={{ y: stackY }}
+        className="pointer-events-none absolute top-[16%] right-[4%] hidden w-[22vw] max-w-[300px] lg:block"
       >
-        <motion.div variants={fade} className="text-xs tracking-[0.22em] uppercase font-bold text-saffron mb-5">
-          MP LEAD — Batch 05 Applications Open
+        <motion.div
+          initial={{ opacity: 0, y: 40, rotate: 3 }}
+          animate={{ opacity: 1, y: 0, rotate: 2.5 }}
+          transition={{ duration: 1.2, delay: 0.55, ease: EASE }}
+          className="relative aspect-3/4 overflow-hidden rounded-t-full shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)]"
+        >
+          <Image
+            src="/images/inst-rashtrapati-bhavan.jpg"
+            alt="Rashtrapati Bhavan"
+            fill
+            sizes="300px"
+            className="object-cover"
+          />
         </motion.div>
-        <h1 className="font-serif font-medium text-[clamp(44px,7.4vw,108px)] leading-[0.98] tracking-tight max-w-4xl mb-7">
-          <span className="block overflow-hidden">
-            <motion.span variants={line} className="block">
-              Legislative exposure.
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span variants={line} className="block">
-              Administrative development.
-            </motion.span>
-          </span>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.75, ease: EASE }}
+          className="relative -mt-16 ml-[-38%] aspect-square w-[62%] overflow-hidden rounded-md shadow-[0_30px_60px_-18px_rgba(0,0,0,0.7)]"
+        >
+          <Image
+            src="/images/inst-supreme-court.jpg"
+            alt="Supreme Court of India"
+            fill
+            sizes="190px"
+            className="object-cover"
+          />
+        </motion.div>
+      </motion.div>
+
+      <motion.div className="relative z-10 text-paper" style={{ y: copyY, opacity: copyOpacity }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: EASE }}
+          className="eyebrow mb-6 flex items-center gap-3 text-saffron"
+        >
+          <span className="h-px w-10 bg-saffron" />
+          Batch 05 — Applications Open
+        </motion.div>
+
+        {/* Two-phase kinetic headline */}
+        <h1 className="display mb-8 text-[clamp(52px,11vw,168px)]">
+          <KineticLine text={current.a} phase={phase} delay={0} />
+          <KineticLine text={current.b} phase={phase} delay={0.06} italic />
         </h1>
-        <motion.p variants={fade} className="text-lg max-w-md text-paper/75 mb-10">
-          A two-month immersive fellowship into governance, public policy and institutional
-          leadership — for India&apos;s most driven young minds.
+
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.85, ease: EASE }}
+          className="mb-9 max-w-md text-[17px] leading-relaxed text-paper/70"
+        >
+          A two-month journey into governance, public policy and leadership — for
+          India&apos;s most driven young minds.
         </motion.p>
-        <motion.div variants={fade} className="flex gap-4">
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1, ease: EASE }}
+          className="flex flex-wrap gap-3.5"
+        >
           <MagneticLink
-            href="/apply"
-            className="group inline-flex items-center gap-2 rounded-full bg-paper text-ink px-7 py-4 text-sm font-bold transition-colors hover:bg-saffron"
+            href="/fellowship"
+            className="grotesque group inline-flex items-center gap-2 rounded-full bg-paper px-8 py-4 text-[13px] font-bold tracking-wide text-ink uppercase transition-colors hover:bg-saffron"
           >
-            Apply Now
+            Explore Fellowship
             <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </MagneticLink>
           <MagneticLink
-            href="/fellowship"
-            className="rounded-full border border-paper/50 px-7 py-4 text-sm font-bold text-paper transition-colors hover:bg-paper hover:text-ink"
+            href="/apply"
+            className="grotesque rounded-full border border-paper/35 px-8 py-4 text-[13px] font-bold tracking-wide text-paper uppercase transition-colors hover:border-paper hover:bg-paper hover:text-ink"
           >
-            Explore MP LEAD
+            Apply Now
           </MagneticLink>
         </motion.div>
       </motion.div>
 
+      {/* Scroll indicator */}
       <motion.div
-        variants={fade}
-        initial="hidden"
-        animate="show"
-        className="absolute left-6 md:left-12 bottom-7 z-10 flex items-center gap-2.5 text-xs uppercase tracking-[0.18em] text-paper/70"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.3 }}
+        className="absolute right-6 bottom-14 z-10 hidden items-center gap-3 md:right-12 md:flex"
       >
-        <span>Scroll</span>
-        <span className="relative w-px h-8.5 bg-paper/40 overflow-hidden">
+        <span className="eyebrow text-paper/40">Scroll</span>
+        <span className="relative h-14 w-px overflow-hidden bg-paper/20">
           <motion.span
-            className="absolute inset-0 bg-paper"
-            animate={{ top: ["-100%", "0%", "100%"] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-x-0 h-1/2 bg-saffron"
+            animate={{ y: ["-100%", "200%"] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </span>
       </motion.div>
 
-      <div className="absolute right-6 md:right-12 bottom-7 z-10 text-[10px] text-paper/40 hidden md:block">
+      <div className="absolute bottom-4 left-6 z-10 text-[10px] text-paper/25 md:left-12">
         India Gate, New Delhi — Wikimedia Commons
       </div>
     </section>
+  );
+}
+
+/** One headline line: letters rise through a mask, restaged on every phase change. */
+function KineticLine({
+  text,
+  phase,
+  delay,
+  italic,
+}: {
+  text: string;
+  phase: number;
+  delay: number;
+  italic?: boolean;
+}) {
+  return (
+    <span className="line-mask">
+      <motion.span
+        key={`${phase}-${text}`}
+        className={`block ${italic ? "italic text-saffron" : ""}`}
+        initial={{ y: "108%" }}
+        animate={{ y: "0%" }}
+        exit={{ y: "-108%" }}
+        transition={{ duration: 1, delay: 0.45 + delay, ease: EASE }}
+      >
+        {text}
+      </motion.span>
+    </span>
   );
 }

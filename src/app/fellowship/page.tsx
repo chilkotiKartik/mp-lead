@@ -59,10 +59,10 @@ export default function FellowshipPage() {
     <>
       <Nav />
       <main className="pt-32 pb-24 px-6 md:px-12 max-w-4xl mx-auto w-full">
-        <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-3">
+        <div className="eyebrow text-saffron-deep mb-3">
           The Fellowship
         </div>
-        <h1 className="font-serif font-medium text-[clamp(32px,4.6vw,58px)] mb-6">
+        <h1 className="display text-[clamp(32px,4.6vw,58px)] mb-6">
           A two-month immersion into governance.
         </h1>
         <p className="text-ink-soft text-lg max-w-2xl mb-16 leading-relaxed">
@@ -78,10 +78,10 @@ export default function FellowshipPage() {
                 style={{ borderColor: p.color }}
               >
                 <div className="flex items-baseline gap-3 mb-2">
-                  <span className="font-serif text-sm" style={{ color: p.color }}>
+                  <span className="display text-sm" style={{ color: p.color }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="font-serif text-xl font-medium">{p.title}</h3>
+                  <h3 className="display text-xl font-medium">{p.title}</h3>
                 </div>
                 <p className="text-ink-soft text-[15px] leading-relaxed">{p.body}</p>
               </div>
@@ -90,7 +90,7 @@ export default function FellowshipPage() {
         </div>
 
         <div className="border-t border-line pt-16">
-          <div className="text-xs tracking-[0.2em] uppercase font-bold text-saffron-deep mb-6">
+          <div className="eyebrow text-saffron-deep mb-6">
             Hover to look inside
           </div>
           <HoverPreview
