@@ -71,7 +71,7 @@ export default function StoriesPage() {
             {rest.map((s, i) => (
               <Reveal key={s.id} className={i === 1 ? "md:pt-16" : ""}>
                 <article className="group">
-                  <div className="relative mb-5 aspect-3/4 overflow-hidden rounded-t-[90px] rounded-b-md">
+                  <div className="relative mb-5 aspect-4/3 overflow-hidden rounded-t-[34px] rounded-b-md">
                     <Image
                       src={s.image}
                       alt=""

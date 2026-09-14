@@ -94,6 +94,7 @@ function RailItem({
   const mx = useMotionValue(0.5);
   const spring = useSpring(mx, { stiffness: 180, damping: 20 });
   const imgX = useTransform(spring, [0, 1], ["-6%", "6%"]);
+  const isProgrammePhoto = category.image.startsWith("/images/mplead-");
 
   return (
     <motion.div
@@ -114,7 +115,13 @@ function RailItem({
         }}
         className="group/rail relative block w-[248px] shrink-0 md:w-[276px]"
       >
-        <div className="relative aspect-4/5 overflow-hidden rounded-t-[130px] rounded-b-md">
+        <div
+          className={`relative overflow-hidden rounded-b-md ${
+            // Arches crop the top corners away, which beheads people at the edge of a
+            // group shot. Buildings survive it; programme photographs get a soft frame.
+            isProgrammePhoto ? "aspect-4/3 rounded-t-[34px]" : "aspect-4/5 rounded-t-[130px]"
+          }`}
+        >
           <motion.div className="absolute inset-[-8%]" style={{ x: imgX }}>
             <Image
               src={category.image}
@@ -125,13 +132,15 @@ function RailItem({
             />
           </motion.div>
           <div className="absolute inset-0 bg-linear-to-t from-ink/45 via-transparent to-transparent" />
-          {/* Crown scrim keeps the numeral legible over pale skies and domes. */}
+          {/* Scrim keeps the numeral legible over pale skies and domes. */}
           <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-ink/40 to-transparent" />
 
-          {/* Index numeral, seated in the crown of the arch. */}
+          {/* Index numeral — crowned on an arch, cornered on a soft frame. */}
           <span
             aria-hidden
-            className="grotesque absolute top-5 left-1/2 -translate-x-1/2 text-[13px] font-bold text-paper"
+            className={`grotesque absolute top-5 text-[13px] font-bold text-paper ${
+              isProgrammePhoto ? "left-5" : "left-1/2 -translate-x-1/2"
+            }`}
           >
             {String(index + 1).padStart(2, "0")}
           </span>

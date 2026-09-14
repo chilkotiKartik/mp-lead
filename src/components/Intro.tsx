@@ -10,14 +10,14 @@ const CURTAIN = [0.76, 0, 0.24, 1] as const;
 
 /** Three real frames from the fellowship, staggered like a contact sheet. */
 const PLATES = [
-  { photo: photos.auditorium, h: "h-28 md:h-36", w: "w-20 md:w-28", delay: 0.05 },
-  { photo: photos.groupPortrait, h: "h-40 md:h-52", w: "w-28 md:w-40", delay: 0.16 },
-  { photo: photos.founderAddress, h: "h-28 md:h-36", w: "w-20 md:w-28", delay: 0.27 },
+  { photo: photos.auditorium, h: "h-24 md:h-32", w: "w-32 md:w-44", delay: 0.05 },
+  { photo: photos.groupPortrait, h: "h-32 md:h-44", w: "w-44 md:w-60", delay: 0.16 },
+  { photo: photos.founderAddress, h: "h-24 md:h-32", w: "w-32 md:w-44", delay: 0.27 },
 ] as const;
 
 /**
- * Brand entrance: three arch-cropped programme photographs wipe up from a
- * cream ground, the wordmark rises through a mask, a saffron rule draws the
+ * Brand entrance: three landscape programme plates wipe up from a cream
+ * ground, the wordmark rises through a mask, a saffron rule draws the
  * duration of the hold, then the whole plate lifts away with the content
  * trailing it. ~2.4s first visit, ~1s on return within a session.
  */
@@ -69,7 +69,7 @@ export function Intro() {
               {PLATES.map((p) => (
                 <motion.figure
                   key={p.photo.src}
-                  className={`relative ${p.w} ${p.h} overflow-hidden rounded-t-full rounded-b-sm`}
+                  className={`relative ${p.w} ${p.h} overflow-hidden rounded-t-[22px] rounded-b-sm`}
                   initial={{ clipPath: "inset(100% 0 0 0)", y: 18 }}
                   animate={{ clipPath: "inset(0% 0 0 0)", y: 0 }}
                   transition={{ duration: 1.05 * s, delay: p.delay * s, ease: EASE }}
@@ -79,7 +79,7 @@ export function Intro() {
                     alt=""
                     fill
                     priority
-                    sizes="160px"
+                    sizes="240px"
                     className="object-cover"
                     aria-hidden
                   />

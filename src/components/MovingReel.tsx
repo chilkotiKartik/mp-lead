@@ -85,15 +85,15 @@ export function MovingReel({
         {run.map((p, i) => (
           <figure
             key={`${p.src}-${i}`}
-            className="reel-frame group w-64 shrink-0 md:w-80"
+            className="reel-frame group w-72 shrink-0 md:w-[26rem]"
             aria-hidden={i >= items.length}
           >
-            <div className="relative aspect-3/4 overflow-hidden rounded-t-[110px] rounded-b-md">
+            <div className="relative aspect-4/3 overflow-hidden rounded-t-[38px] rounded-b-md">
               <Image
                 src={p.src}
                 alt={i < items.length ? p.alt : ""}
                 fill
-                sizes="(min-width: 768px) 320px, 256px"
+                sizes="(min-width: 768px) 416px, 288px"
                 className="object-cover grayscale-[30%] transition-[filter,transform] duration-700 ease-out group-hover:scale-105 group-hover:grayscale-0"
               />
             </div>

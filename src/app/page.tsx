@@ -214,15 +214,15 @@ export default function Home() {
             color="var(--saffron)"
             size={720}
           />
-          <div className="relative mx-auto max-w-5xl">
+          <div className="relative mx-auto max-w-6xl">
             <Reveal className="mb-16 text-center">
               <div className="eyebrow text-saffron">The Fellowship, In Numbers</div>
             </Reveal>
-            <RevealStagger className="grid grid-cols-2 gap-10 md:grid-cols-4">
+            <RevealStagger className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 md:gap-x-8">
               {[...stats.slice(0, 3), { value: 18, suffix: "", label: "States Represented" }].map(
                 (s) => (
                   <RevealItem key={s.label} className="text-center">
-                    <div className="grotesque text-[clamp(54px,8vw,112px)] leading-[0.85] font-extrabold">
+                    <div className="grotesque text-[clamp(32px,4.4vw,66px)] leading-[0.9] font-extrabold whitespace-nowrap">
                       <Counter value={s.value} suffix={s.suffix} />
                     </div>
                     <div className="eyebrow mt-4 text-paper/45">{s.label}</div>

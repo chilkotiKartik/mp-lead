@@ -93,7 +93,7 @@ export function Voices() {
 
               <div className="mt-9 flex flex-col-reverse items-start gap-5 border-t border-line pt-6 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
                 <div className="flex min-w-0 items-center gap-3.5">
-                  <div className="relative size-12 shrink-0 overflow-hidden rounded-t-full rounded-b-sm">
+                  <div className="relative size-12 shrink-0 overflow-hidden rounded-md">
                     <Image src={v.image} alt="" fill sizes="48px" className="object-cover" />
                   </div>
                   <figcaption className="eyebrow text-ink-soft">{v.source}</figcaption>

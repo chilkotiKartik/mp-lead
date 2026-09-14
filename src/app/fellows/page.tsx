@@ -66,7 +66,7 @@ export default function FellowsPage() {
           <RevealStagger className="mb-24 grid gap-x-6 gap-y-12 md:grid-cols-3">
             {gallery.slice(1, 10).map((p, i) => (
               <RevealItem key={p.src} className={i % 3 === 1 ? "md:pt-14" : ""}>
-                <TiltCard maxTilt={5} className="group aspect-4/5 overflow-hidden rounded-t-[100px] rounded-b-md">
+                <TiltCard maxTilt={5} className="group aspect-4/3 overflow-hidden rounded-t-[36px] rounded-b-md">
                   <Image
                     src={p.src}
                     alt={p.alt}

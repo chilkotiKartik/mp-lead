@@ -123,7 +123,7 @@ export function Nav({ dark = false }: { dark?: boolean }) {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="display flex-1 text-[34px] leading-tight">{l.label}</span>
-                    <span className="relative size-14 shrink-0 overflow-hidden rounded-t-full rounded-b-sm">
+                    <span className="relative size-14 shrink-0 overflow-hidden rounded-md">
                       <Image
                         src={l.image}
                         alt=""

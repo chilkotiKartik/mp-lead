@@ -60,8 +60,10 @@ export function JourneyScroll() {
             <motion.section
               key={s.title}
               onViewportEnter={() => setActive(i)}
-              viewport={{ amount: 0.6 }}
-              className="flex min-h-[54vh] flex-col justify-center border-b border-line py-10 last:border-0"
+              // A narrow band across the middle of the viewport, so the plate
+              // always shows the stage the reader is actually level with.
+              viewport={{ margin: "-45% 0px -45% 0px" }}
+              className="flex min-h-[46vh] flex-col justify-center border-b border-line py-10 last:border-0"
             >
               <div className="mb-4 flex items-center gap-3">
                 <span className="grotesque text-[13px] font-extrabold text-ink/25">
@@ -103,12 +105,14 @@ export function JourneyScroll() {
 
         {/* Sticky plate — desktop only */}
         <div className="hidden lg:block">
-          <div className="sticky top-24 h-[74vh]">
+          {/* A 4:3 plate rather than a tall arch — the photographs are of rooms full
+              of people, and an arch crop takes the people at the edges with it. */}
+          <div className="sticky top-[16vh] aspect-4/3">
             <span
               aria-hidden
-              className="absolute -top-3 -right-3 bottom-3 left-3 rounded-t-[110px] rounded-b-md border border-saffron-deep/25"
+              className="absolute -top-3 -right-3 bottom-3 left-3 rounded-[34px] border border-saffron-deep/25"
             />
-            <div className="relative h-full overflow-hidden rounded-t-[110px] rounded-b-md">
+            <div className="relative h-full overflow-hidden rounded-t-[34px] rounded-b-md">
               <AnimatePresence mode="popLayout">
                 <motion.div
                   key={stage.image}
