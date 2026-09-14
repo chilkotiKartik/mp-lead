@@ -162,10 +162,14 @@ body::after {
   text-transform: uppercase;
 }
 
-/* Mask-reveal primitive: the child slides up out of an overflow-clipped line. */
+/* Mask-reveal primitive: the child slides up out of an overflow-clipped line.
+   The padding/margin pair gives descenders and italic overshoot room inside the
+   clip box without changing the line's contribution to layout. */
 .line-mask {
   display: block;
   overflow: hidden;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
 }
 
 .gradient-underline {

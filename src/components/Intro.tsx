@@ -33,7 +33,7 @@ export function Intro() {
     <AnimatePresence>
       {phase === "playing" && (
         <motion.div
-          className="fixed inset-0 z-100 flex cursor-pointer items-center justify-center overflow-hidden bg-ink"
+          className="fixed inset-0 z-100 flex cursor-pointer items-center justify-center overflow-hidden bg-paper"
           onClick={() => setPhase("done")}
           exit={{ y: "-100%" }}
           transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
@@ -42,7 +42,7 @@ export function Intro() {
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0, scale: 1.12 }}
-            animate={{ opacity: 0.3, scale: 1 }}
+            animate={{ opacity: 0.12, scale: 1 }}
             transition={{ duration: 1.6 * s, delay: 0.75 * s, ease: EASE }}
           >
             <Image
@@ -68,7 +68,7 @@ export function Intro() {
             >
               <motion.path
                 d="M8 94 L8 46 A58 58 0 0 1 124 46 L124 94"
-                stroke="var(--saffron)"
+                stroke="var(--saffron-deep)"
                 strokeWidth="1.5"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
@@ -76,8 +76,8 @@ export function Intro() {
               />
               <motion.path
                 d="M34 94 L34 52 A32 32 0 0 1 98 52 L98 94"
-                stroke="var(--paper)"
-                strokeOpacity="0.35"
+                stroke="var(--ink)"
+                strokeOpacity="0.3"
                 strokeWidth="1"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
@@ -88,8 +88,8 @@ export function Intro() {
                 y1="94.5"
                 x2="132"
                 y2="94.5"
-                stroke="var(--paper)"
-                strokeOpacity="0.5"
+                stroke="var(--ink)"
+                strokeOpacity="0.45"
                 strokeWidth="1"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
@@ -100,7 +100,7 @@ export function Intro() {
             {/* Wordmark rises through a mask. */}
             <span className="line-mask">
               <motion.span
-                className="display block text-[clamp(46px,9vw,104px)] text-paper"
+                className="display block text-[clamp(46px,9vw,104px)]"
                 initial={{ y: "110%" }}
                 animate={{ y: "0%" }}
                 transition={{ duration: 0.95 * s, delay: 0.42 * s, ease: EASE }}
@@ -111,7 +111,7 @@ export function Intro() {
 
             <span className="mt-4 line-mask">
               <motion.span
-                className="eyebrow block text-paper/45"
+                className="eyebrow block text-ink-soft"
                 initial={{ y: "120%" }}
                 animate={{ y: "0%" }}
                 transition={{ duration: 0.8 * s, delay: 0.72 * s, ease: EASE }}

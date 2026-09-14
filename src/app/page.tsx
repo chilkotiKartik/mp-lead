@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Intro />
-      <Nav dark />
+      <Nav />
       <main>
         <Hero />
 
@@ -30,23 +30,6 @@ export default function Home() {
             "18 States Represented",
           ]}
         />
-
-        {/* STATS — oversized grotesque numerals, asymmetric */}
-        <section className="border-b border-line px-6 py-24 md:px-12">
-          <RevealStagger className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-14 md:grid-cols-4">
-            {stats.map((s, i) => (
-              <RevealItem key={s.label} className={i % 2 === 1 ? "md:pt-10" : ""}>
-                <div className="grotesque text-[clamp(44px,6vw,86px)] leading-[0.85] font-extrabold">
-                  <Counter value={s.value} suffix={s.suffix} />
-                </div>
-                <div className="mt-3 flex items-center gap-2.5">
-                  <span className="h-px w-6 bg-saffron" />
-                  <span className="eyebrow text-ink-soft">{s.label}</span>
-                </div>
-              </RevealItem>
-            ))}
-          </RevealStagger>
-        </section>
 
         {/* SIGNATURE CATEGORY RAIL */}
         <CategoryRail categories={[...categories]} />
