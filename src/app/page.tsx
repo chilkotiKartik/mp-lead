@@ -11,6 +11,9 @@ import { Marquee } from "@/components/Marquee";
 import { TiltCard } from "@/components/TiltCard";
 import { RingBlob } from "@/components/RingBlob";
 import { CategoryRail } from "@/components/CategoryRail";
+import { LiveBand } from "@/components/LiveBand";
+import { MovingReel } from "@/components/MovingReel";
+import { Voices } from "@/components/Voices";
 import { stats, institutions, journeyStages, projects, categories } from "@/lib/data";
 import { gallery } from "@/lib/photos";
 
@@ -21,6 +24,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+
+        <LiveBand />
 
         <Marquee
           items={[
@@ -143,28 +148,11 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <RevealStagger className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-6 px-6 pb-4 md:scroll-pl-12 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {gallery.slice(0, 7).map((p) => (
-              <RevealItem key={p.src} className="w-72 shrink-0 snap-start">
-                <Link href="/fellows" className="group block">
-                  <TiltCard maxTilt={6} className="h-90 w-72 overflow-hidden rounded-t-[110px] rounded-b-md">
-                    <Image
-                      src={p.src}
-                      alt={p.alt}
-                      fill
-                      sizes="288px"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                  </TiltCard>
-                  <div className="eyebrow pt-3.5 text-ink-soft">{p.caption}</div>
-                </Link>
-              </RevealItem>
-            ))}
-          </RevealStagger>
+          <MovingReel items={gallery} />
         </section>
 
         {/* PROJECTS */}
-        <section className="px-6 py-32 md:px-12">
+        <section className="px-6 pt-32 pb-20 md:px-12">
           <div className="mx-auto max-w-6xl">
             <Reveal className="mb-20">
               <div className="eyebrow mb-4 text-saffron-deep">Field Projects</div>
@@ -215,6 +203,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* VOICES */}
+        <Voices />
 
         {/* IMPACT */}
         <section className="relative overflow-hidden bg-ink px-6 py-36 text-paper md:px-12">
