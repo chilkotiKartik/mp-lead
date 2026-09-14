@@ -26,7 +26,7 @@ export const events: ProgrammeEvent[] = [
     venue: "[Venue TBC]",
     summary:
       "The batch meets for the first time. Fellowship structure, expectations and the institutions ahead are introduced.",
-    image: "/images/inst-rashtrapati-bhavan.jpg",
+    image: "/images/mplead-founder-address.jpg",
   },
   {
     id: "e02",
@@ -37,7 +37,7 @@ export const events: ProgrammeEvent[] = [
     venue: "[Venue TBC]",
     summary:
       "Structured sessions on policy fundamentals, governance frameworks and research methods before fieldwork begins.",
-    image: "/images/delhi-connaught.jpg",
+    image: "/images/mplead-auditorium.jpg",
   },
   {
     id: "e03",
@@ -48,7 +48,7 @@ export const events: ProgrammeEvent[] = [
     venue: "New Delhi",
     summary:
       "Direct engagement with constitutional offices and ministries — observing protocol, process and the machinery of the state.",
-    image: "/images/inst-south-block.jpg",
+    image: "/images/mplead-officials-panel.jpg",
   },
   {
     id: "e04",
@@ -59,7 +59,7 @@ export const events: ProgrammeEvent[] = [
     venue: "Project districts",
     summary:
       "Fellows travel to their project districts for ground-level fieldwork — interviews, site visits and data collection.",
-    image: "/images/hampi.jpg",
+    image: "/images/mplead-haryana-bhawan.jpg",
   },
   {
     id: "e05",
@@ -70,7 +70,7 @@ export const events: ProgrammeEvent[] = [
     venue: "[Venue TBC]",
     summary:
       "Each fellow presents their final report and recommendations to a review panel at the close of the fellowship.",
-    image: "/images/inst-supreme-court.jpg",
+    image: "/images/mplead-fellow-speaking.jpg",
   },
   {
     id: "e06",
@@ -81,7 +81,7 @@ export const events: ProgrammeEvent[] = [
     venue: "[Venue TBC]",
     summary:
       "Fellows graduate into the MP LEAD alumni network, carrying the fellowship's perspective into their careers.",
-    image: "/images/hero-india-gate.jpg",
+    image: "/images/mplead-group-portrait.jpg",
   },
 ];
 
@@ -101,7 +101,7 @@ export const stories: Story[] = [
     category: "Reflection",
     excerpt:
       "Observing a ministry at work reframes what policy actually is — less a document, more a negotiation between people, files and time.",
-    image: "/images/inst-south-block.jpg",
+    image: "/images/mplead-officials-panel.jpg",
     readingTime: "6 min",
   },
   {
@@ -110,7 +110,7 @@ export const stories: Story[] = [
     category: "Field Notes",
     excerpt:
       "Field engagement turns a research question into a set of conversations — and most of what matters is in what people do not say.",
-    image: "/images/hampi.jpg",
+    image: "/images/mplead-haryana-bhawan.jpg",
     readingTime: "8 min",
   },
   {
@@ -119,7 +119,7 @@ export const stories: Story[] = [
     category: "Dispatch",
     excerpt:
       "A recommendation only becomes real when it survives contact with the people who have to implement it.",
-    image: "/images/delhi-connaught.jpg",
+    image: "/images/mplead-fellow-speaking.jpg",
     readingTime: "5 min",
   },
   {
@@ -128,7 +128,7 @@ export const stories: Story[] = [
     category: "Programme",
     excerpt:
       "From over five thousand applications to a cohort of forty — the screening, shortlisting and interview process explained.",
-    image: "/images/jaipur-hawa-mahal.jpg",
+    image: "/images/mplead-interview.jpg",
     readingTime: "4 min",
   },
 ];

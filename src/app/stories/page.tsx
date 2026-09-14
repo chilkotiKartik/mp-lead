@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { Reveal } from "@/components/Reveal";
+import Link from "next/link";
+import { Reveal, RevealStagger, RevealItem } from "@/components/Reveal";
 import { Marquee } from "@/components/Marquee";
 import { stories } from "@/lib/content";
+import { gallery } from "@/lib/photos";
 
 export const metadata: Metadata = { title: "Stories — MP LEAD" };
 
@@ -91,6 +93,52 @@ export default function StoriesPage() {
             ))}
           </div>
         </div>
+
+        {/* FROM THE PROGRAMME — fills the page with real photography */}
+        <section className="mt-28 border-t border-line pt-16">
+          <div className="mx-auto mb-10 max-w-6xl px-6 md:px-12">
+            <div className="eyebrow mb-3 text-saffron-deep">From the programme</div>
+            <h2 className="display max-w-2xl text-[clamp(30px,4.5vw,60px)]">
+              The fellowship, <span className="italic">as it happened.</span>
+            </h2>
+          </div>
+
+          <RevealStagger className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-pl-6 px-6 pb-4 md:scroll-pl-12 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {gallery.map((p) => (
+              <RevealItem key={p.src} className="w-[300px] shrink-0 snap-start">
+                <div className="group relative aspect-4/3 overflow-hidden rounded-md">
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes="300px"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </div>
+                <div className="eyebrow mt-3 text-ink-soft">{p.caption}</div>
+              </RevealItem>
+            ))}
+          </RevealStagger>
+
+          <div className="mx-auto mt-14 max-w-6xl px-6 md:px-12">
+            <div className="flex flex-wrap items-center justify-between gap-6 rounded-2xl bg-paper-dim px-8 py-10">
+              <div>
+                <h3 className="display mb-2 text-[clamp(24px,3vw,38px)]">
+                  Write the next dispatch.
+                </h3>
+                <p className="max-w-md text-[14.5px] text-ink-soft">
+                  Batch 05 applications are open. Fellows publish their field notes here.
+                </p>
+              </div>
+              <Link
+                href="/apply"
+                className="grotesque shrink-0 rounded-full bg-ink px-8 py-4 text-[13px] font-bold tracking-wide text-paper uppercase transition-colors hover:bg-saffron-deep"
+              >
+                Apply to Batch 05
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

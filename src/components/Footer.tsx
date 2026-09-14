@@ -37,7 +37,7 @@ export function Footer() {
         </div>
       </div>
       <p className="mt-14 text-[11px] text-ink-soft/70">
-        Institutional photography courtesy of Wikimedia Commons contributors.
+        Programme photography © MP LEAD Fellowship. Architectural photography courtesy of Wikimedia Commons contributors.
       </p>
     </footer>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { Marquee } from "@/components/Marquee";
 import { TiltCard } from "@/components/TiltCard";
@@ -33,15 +34,17 @@ export default function ProjectsPage() {
                     i % 2 === 1 ? "md:[direction:rtl]" : ""
                   }`}
                 >
-                  <TiltCard maxTilt={6} className="aspect-4/3 [direction:ltr]">
-                    <div
-                      className="h-full w-full rounded overflow-hidden"
-                      style={{ background: p.tint }}
-                    >
-                      <span className="absolute top-5 left-5 bg-paper/90 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider">
-                        {p.tag}
-                      </span>
-                    </div>
+                  <TiltCard maxTilt={6} className="group aspect-4/3 overflow-hidden rounded-md [direction:ltr]">
+                    <Image
+                      src={p.image}
+                      alt={p.title}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    <span className="eyebrow absolute top-5 left-5 rounded-full bg-paper/90 px-3.5 py-1.5 text-ink">
+                      {p.tag}
+                    </span>
                   </TiltCard>
                   <div className="[direction:ltr]">
                     <h3 className="display text-[clamp(24px,2.6vw,34px)] mb-3.5">

@@ -11,7 +11,8 @@ import { Marquee } from "@/components/Marquee";
 import { TiltCard } from "@/components/TiltCard";
 import { RingBlob } from "@/components/RingBlob";
 import { CategoryRail } from "@/components/CategoryRail";
-import { stats, institutions, journeyStages, fellows, projects, categories } from "@/lib/data";
+import { stats, institutions, journeyStages, projects, categories } from "@/lib/data";
+import { gallery } from "@/lib/photos";
 
 export default function Home() {
   return (
@@ -123,49 +124,39 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FELLOW STORIES */}
+        {/* THE COHORT — real programme photography */}
         <section className="bg-paper-dim py-32">
           <div className="mx-auto max-w-6xl px-6 md:px-12">
             <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <div className="eyebrow mb-4 text-saffron-deep">Fellow Stories</div>
+                <div className="eyebrow mb-4 text-saffron-deep">The Cohort</div>
                 <h2 className="display text-[clamp(36px,6vw,82px)]">
-                  Forty voices. <span className="italic text-saffron-deep">One republic.</span>
+                  Forty voices. <span className="text-saffron-deep italic">One republic.</span>
                 </h2>
               </div>
               <Link
                 href="/fellows"
                 className="grotesque rounded-full border border-ink px-7 py-3.5 text-[13px] font-bold tracking-wide uppercase transition-colors hover:bg-ink hover:text-paper"
               >
-                View directory
+                Meet the cohort
               </Link>
             </Reveal>
           </div>
 
           <RevealStagger className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-pl-6 px-6 pb-4 md:scroll-pl-12 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {fellows.slice(0, 6).map((f) => (
-              <RevealItem key={f.id} className="w-67 shrink-0 snap-start">
-                <Link href={`/fellows/${f.id}`} className="group block">
-                  <TiltCard maxTilt={6} className="h-85 w-67">
-                    <div
-                      className="flex h-85 w-67 items-end overflow-hidden rounded-t-[110px] rounded-b-md transition-[border-radius] duration-500 group-hover:rounded-t-md group-hover:rounded-br-[60px]"
-                      style={{ background: f.tint }}
-                    >
-                      <div
-                        aria-hidden
-                        className="display absolute inset-0 flex items-center justify-center text-[130px] text-paper/15 transition-transform duration-700 group-hover:scale-110"
-                      >
-                        {f.initial}
-                      </div>
-                      <div className="relative p-5">
-                        <h4 className="display text-[21px] text-paper">Fellow — {f.batch}</h4>
-                        <span className="eyebrow text-paper/50">{f.state}</span>
-                      </div>
-                    </div>
+            {gallery.slice(0, 7).map((p) => (
+              <RevealItem key={p.src} className="w-72 shrink-0 snap-start">
+                <Link href="/fellows" className="group block">
+                  <TiltCard maxTilt={6} className="h-90 w-72 overflow-hidden rounded-t-[110px] rounded-b-md">
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      fill
+                      sizes="288px"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
                   </TiltCard>
-                  <div className="grotesque pt-3.5 text-[12px] font-semibold tracking-wide text-ink-soft uppercase opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    {f.focus}
-                  </div>
+                  <div className="eyebrow pt-3.5 text-ink-soft">{p.caption}</div>
                 </Link>
               </RevealItem>
             ))}
@@ -190,15 +181,17 @@ export default function Home() {
                       i % 2 === 1 ? "md:[direction:rtl]" : ""
                     }`}
                   >
-                    <TiltCard maxTilt={6} className="aspect-4/3 [direction:ltr]">
-                      <div
-                        className="h-full w-full overflow-hidden rounded-md"
-                        style={{ background: p.tint }}
-                      >
-                        <span className="eyebrow absolute top-5 left-5 rounded-full bg-paper/90 px-3.5 py-1.5 text-ink">
-                          {p.tag}
-                        </span>
-                      </div>
+                    <TiltCard maxTilt={6} className="group aspect-4/3 overflow-hidden rounded-md [direction:ltr]">
+                      <Image
+                        src={p.image}
+                        alt={p.title}
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                      <span className="eyebrow absolute top-5 left-5 rounded-full bg-paper/90 px-3.5 py-1.5 text-ink">
+                        {p.tag}
+                      </span>
                     </TiltCard>
                     <div className="[direction:ltr]">
                       <h3 className="display mb-4 text-[clamp(28px,3.4vw,44px)]">{p.title}</h3>
