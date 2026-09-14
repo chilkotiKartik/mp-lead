@@ -7,7 +7,8 @@ import { Reveal, RevealStagger, RevealItem } from "@/components/Reveal";
 import { LiveBadge } from "@/components/LiveBadge";
 import { Counter } from "@/components/Counter";
 import { TiltCard } from "@/components/TiltCard";
-import { photos, gallery } from "@/lib/photos";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
+import { gallery } from "@/lib/photos";
 import { stats } from "@/lib/data";
 
 export const metadata: Metadata = { title: "The Cohort — MP LEAD" };
@@ -32,23 +33,12 @@ export default function FellowsPage() {
           </p>
         </div>
 
-        {/* Lead plate — the cohort, full bleed */}
-        <Reveal>
-          <figure className="relative mb-6 h-[62vh] min-h-[380px] w-full overflow-hidden">
-            <Image
-              src={photos.auditorium.src}
-              alt={photos.auditorium.alt}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-            <figcaption className="absolute bottom-0 left-0 flex items-center gap-3 bg-paper px-5 py-3">
-              <span className="eyebrow text-saffron-deep">Batch 04</span>
-              <span className="text-[12.5px] text-ink-soft">{photos.auditorium.caption}</span>
-            </figcaption>
-          </figure>
-        </Reveal>
+        {/* Lead plate — the cohort, as a cinematic reel */}
+        <div className="mx-auto mb-16 max-w-6xl px-6 md:px-12">
+          <Reveal>
+            <PhotoCarousel items={gallery} aspect="aspect-4/3 md:aspect-16/9" />
+          </Reveal>
+        </div>
 
         {/* Cohort figures */}
         <div className="mx-auto max-w-6xl px-6 md:px-12">

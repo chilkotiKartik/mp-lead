@@ -3,8 +3,9 @@ import Image from "next/image";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
-import { Reveal, RevealStagger, RevealItem } from "@/components/Reveal";
+import { Reveal } from "@/components/Reveal";
 import { Marquee } from "@/components/Marquee";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
 import { stories } from "@/lib/content";
 import { gallery } from "@/lib/photos";
 
@@ -103,22 +104,11 @@ export default function StoriesPage() {
             </h2>
           </div>
 
-          <RevealStagger className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-pl-6 px-6 pb-4 md:scroll-pl-12 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {gallery.map((p) => (
-              <RevealItem key={p.src} className="w-[300px] shrink-0 snap-start">
-                <div className="group relative aspect-4/3 overflow-hidden rounded-md">
-                  <Image
-                    src={p.src}
-                    alt={p.alt}
-                    fill
-                    sizes="300px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <div className="eyebrow mt-3 text-ink-soft">{p.caption}</div>
-              </RevealItem>
-            ))}
-          </RevealStagger>
+          <div className="mx-auto max-w-6xl px-6 md:px-12">
+            <Reveal>
+              <PhotoCarousel items={gallery} aspect="aspect-4/3 md:aspect-16/9" />
+            </Reveal>
+          </div>
 
           <div className="mx-auto mt-14 max-w-6xl px-6 md:px-12">
             <div className="flex flex-wrap items-center justify-between gap-6 rounded-2xl bg-paper-dim px-8 py-10">
